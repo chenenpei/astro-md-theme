@@ -57,7 +57,7 @@ export default {
       background: "#FFFFFF",
       surface: "#FFFFFF",
       error: "#B00020",
-      outline: "rgba(0,0,0,12)",
+      outline: "rgba(0,0,0,0.12)",
     },
     fontSize: {
       h1: [
@@ -190,6 +190,11 @@ export default {
       fontFamily: {
         sans: ['"Roboto"', ...defaultTheme.fontFamily.sans],
       },
+      maxWidth: {
+        "screen-phone": "600px",
+        "screen-tablet": "1024px",
+        "screen-laptop": "1440px"
+      }
     },
   },
   plugins: [],

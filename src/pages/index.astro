@@ -1,7 +1,68 @@
 ---
-import Layout from '../layouts/index.astro';
+import Button from "../components/Button.astro";
+import Layout from "../layouts/index.astro";
+
+const postLists: {
+  title: string;
+  date: Date | string;
+  descrption?: string;
+  url: "";
+}[] = [
+  {
+    title: "A Mark down Sample",
+    date: "2024-01-24",
+    descrption:
+      "Until now, trying to style an article, document, or blog post with Tailwind has been a tedious task that required a keen eye for typography and a lot of complex custom CSS.",
+    url: "",
+  },
+];
 ---
 
 <Layout title="Home">
-   <h1 class="text-h1">Home</h1>
+  <div class="pt-xl px-base pb-0 flex flex-col items-center">
+    <sction class="shadow-1 w-full max-w-screen-phone">
+      <figure>
+        <img
+          src="https://m1.material.io/assets/0Bx4BSt6jniD7Y1huOXVQdlFPMmM/materialdesign-introduction.png"
+          alt="Material Design Illustration"
+        />
+      </figure>
+      <p class="p-xl text-on-secondary-md-em">
+        Material is a design system created by Google to help teams build
+        high-quality digital experiences for Android, iOS, Flutter, and the web.
+      </p>
+      <div class="p-base pt-0">
+        <Button class="text-primary-500">
+          <a href="/about">See More</a>
+        </Button>
+      </div>
+    </sction>
+
+    <sction class="mt-base shadow-1 w-full max-w-screen-phone">
+      <div class="px-xl pt-2xl pb-md">
+        <h2 class="text-h5 text-on-secondary-em">Recent Posts</h2>
+        <p class="mt-sm text-body-2 text-on-secondary-md-em">
+          Here are the three most recent articles displayed below.
+        </p>
+      </div>
+      <ul class="px-xl">
+        {
+          postLists.map((post) => (
+            <li class=" pt-md pb-xl border-b border-outline border-solid">
+              <p class="text-overline text-on-secondary-md-em">{post.date}</p>
+              <h3 class="text-sub1 text-on-secondary-em">{post.title}</h3>
+              <p class="text-body-2 text-on-secondary-md-em">
+                {post.descrption}
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="p-base pt-0">
+        <Button class="text-primary-500">
+          <a href="/about">View All</a>
+        </Button>
+      </div>
+    </sction>
+  </div>
 </Layout>

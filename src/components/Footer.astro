@@ -1,4 +1,14 @@
+---
+const { class: className } = Astro.props;
+---
 
-<footer>
-    <div>2024 © Aastro Material Design Theme</div>
+<footer class:list={[className, "px-base py-4xl text-on-secondary-em"]}>
+  <ul class="mb-base flex justify-center gap-base">
+    <li><a>GitHub</a></li>
+    <li>/</li>
+    <li><a>Tiwitter</a></li>
+    <li>/</li>
+    <li><a>Instagram</a></li>
+  </ul>
+  <div class="text-center">2024 © Aastro Material Design Theme</div>
 </footer>

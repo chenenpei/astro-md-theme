@@ -1,0 +1,7 @@
+---
+const { class: className } = Astro.props;
+---
+
+<header class:list={[className, "bg-primary-500 p-xl z-10"]}>
+  <h1 class="text-on-primary-em text-h6">Astro Blog</h1>
+</header>

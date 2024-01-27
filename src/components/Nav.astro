@@ -28,6 +28,7 @@ const navLinks = [
       navLinks.map((link) => (
         <li
           class:list={[
+            "ripple-target",
             "py-xl flex-1 text-center text-button uppercase relative",
             link.active
               ? "text-on-primary-em after:content-[''] after:absolute after:bottom-0 after:left-0 after:bg-on-primary-em after:h-0.5 after:w-full"
@@ -40,3 +41,15 @@ const navLinks = [
     }
   </ul>
 </nav>
+
+<script>
+  import { createRippleEffect } from "../utils/effect";
+  const buttons = document.querySelectorAll("li.ripple-target");
+
+  // Handle clicks on each button.
+  buttons.forEach((button) => {
+    button.addEventListener("click", (e) =>
+      createRippleEffect(e as MouseEvent)
+    );
+  });
+</script>

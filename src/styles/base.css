@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-button.ripple {
+.ripple-target {
   position: relative;
   overflow: hidden;
   transition: background 400ms;

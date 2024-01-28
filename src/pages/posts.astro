@@ -1,19 +1,13 @@
 ---
 import Layout from "../layouts/index.astro";
-const postLists: {
+
+interface Frontmatter {
   title: string;
-  date: Date | string;
-  descrption?: string;
-  url: "";
-}[] = [
-  {
-    title: "A Mark down Sample",
-    date: "2024-01-24",
-    descrption:
-      "Until now, trying to style an article, document, or blog post with Tailwind has been a tedious task that required a keen eye for typography and a lot of complex custom CSS.",
-    url: "",
-  },
-];
+  author: string;
+  description?: string;
+  pubDate: string;
+}
+const allPosts = await Astro.glob<Frontmatter>("../pages/posts/*.md");
 ---
 
 <Layout title="Posts">
@@ -27,12 +21,18 @@ const postLists: {
       </header>
       <ul class="px-xl">
         {
-          postLists.map((post) => (
+          allPosts.map((post) => (
             <li class=" pt-md pb-xl border-b border-outline border-solid">
-              <p class="text-overline text-on-secondary-md-em">{post.date}</p>
-              <h3 class="text-sub1 text-on-secondary-em">{post.title}</h3>
+              <p class="text-overline text-on-secondary-md-em">
+                {`${post.frontmatter.pubDate.slice(0, 10)} ${
+                  post.frontmatter.author
+                }`}
+              </p>
+              <h3 class="text-sub1 text-on-secondary-em">
+                {post.frontmatter.title}
+              </h3>
               <p class="text-body-2 text-on-secondary-md-em">
-                {post.descrption}
+                {post.frontmatter.description}
               </p>
             </li>
           ))

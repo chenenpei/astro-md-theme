@@ -1,7 +1,15 @@
 ---
-const { class: className } = Astro.props;
+import Nav from "./Nav.astro";
+const { class: className, title } = Astro.props;
 ---
 
-<header class:list={[className, "bg-primary-500 p-xl z-10"]}>
-  <h1 class="text-on-primary-em text-h6">Astro Blog</h1>
+<header
+  class:list={[
+    className,
+    "sticky top-0 bg-primary-500 shadow-3 z-10",
+    "tablet:flex tablet:justify-between",
+  ]}
+>
+  <h1 class="p-xl text-on-primary-em text-h6">Astro Blog</h1>
+  <Nav title={title} />
 </header>

@@ -22,24 +22,25 @@ const navLinks = [
 ];
 ---
 
-<nav class:list={[className, "bg-primary-500 shadow-3"]}>
-  <ul class="flex">
-    {
-      navLinks.map((link) => (
-        <li
-          class:list={[
-            "ripple-target",
-            "py-xl flex-1 text-center text-button uppercase relative",
-            link.active
-              ? "text-on-primary-em after:content-[''] after:absolute after:bottom-0 after:left-0 after:bg-on-primary-em after:h-0.5 after:w-full"
-              : "text-on-primary-md-em",
-          ]}
-        >
-          <a href={link.url}>{link.text}</a>
-        </li>
-      ))
-    }
-  </ul>
+<nav class:list={[className, "flex bg-primary-500"]}>
+  {
+    navLinks.map((link) => (
+      <a
+        class:list={[
+          "ripple-target",
+          "py-xl flex-1 flex items-center justify-center text-button uppercase relative",
+          "tablet:min-w-32",
+          link.active
+            ? "text-on-primary-em after:content-[''] after:absolute after:bottom-0 after:left-0 after:bg-on-primary-em after:h-0.5 after:w-full"
+            : "text-on-primary-md-em",
+        ]}
+        href={link.url}
+        data-astro-prefetch
+      >
+        {link.text}
+      </a>
+    ))
+  }
 </nav>
 
 <script>

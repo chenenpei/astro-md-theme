@@ -44,7 +44,7 @@ const onSecondaryTextColors = {
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
-    screen: {
+    screens: {
       phone: "600px",
       tablet: "1024px",
       laptop: "1440px"

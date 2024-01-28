@@ -6,7 +6,7 @@ import Footer from "../components/Footer.astro";
 const { title } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" transition:animate="none">
   <head>
     <meta name="description" content="An Astro theme for blog that follows Material Design guideline." />
     <meta name="keywords" content="Astro,Material Design,Blog,Theme" />
@@ -21,7 +21,7 @@ const { title } = Astro.props;
   </head>
   <body class="flex flex-col">
     <Header class="flex-shrink-0 flex-grow-0" title={title} />
-    <main class="flex-auto">
+    <main class="flex-auto" transition:animate="fade">
       <slot />
     </main>
     <Footer class="flex-shrink-0 flex-grow-0" />

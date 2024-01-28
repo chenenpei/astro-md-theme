@@ -1,8 +1,5 @@
 ---
-import { Image } from "astro:assets";
-import Button from "../components/Button.astro";
 import Layout from "../layouts/index.astro";
-
 const postLists: {
   title: string;
   date: Date | string;
@@ -19,28 +16,8 @@ const postLists: {
 ];
 ---
 
-<Layout title="Home">
+<Layout title="Posts">
   <div class="pt-xl px-base pb-0 flex flex-col items-center">
-    <sction class="shadow-1 w-full max-w-screen-phone">
-      <figure>
-        <Image
-          src="https://m1.material.io/assets/0Bx4BSt6jniD7Y1huOXVQdlFPMmM/materialdesign-introduction.png"
-          alt="Material Design Illustration"
-          width="822"
-          height="442"
-        />
-      </figure>
-      <p class="p-xl text-on-secondary-md-em">
-        Material is a design system created by Google to help teams build
-        high-quality digital experiences for Android, iOS, Flutter, and the web.
-      </p>
-      <footer class="p-base pt-0">
-        <Button class="text-primary-500">
-          <a href="/about" data-astro-prefetch>See More Info</a>
-        </Button>
-      </footer>
-    </sction>
-
     <sction class="mt-base shadow-1 w-full max-w-screen-phone">
       <header class="px-xl pt-2xl pb-md">
         <h2 class="text-h5 text-on-secondary-em">Recent Posts</h2>
@@ -61,11 +38,6 @@ const postLists: {
           ))
         }
       </ul>
-      <footer class="p-base pt-0">
-        <Button class="text-primary-500">
-          <a href="/posts" data-astro-prefetch>View All</a>
-        </Button>
-      </footer>
     </sction>
   </div>
 </Layout>

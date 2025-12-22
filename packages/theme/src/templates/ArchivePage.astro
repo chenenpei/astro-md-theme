@@ -1,0 +1,121 @@
+---
+import Layout from '../components/Layout.astro';
+import Header from '../components/Header.astro';
+import PostCard from '../components/PostCard.astro';
+
+interface Props {
+  siteTitle?: string;
+  posts: Array<{
+    title: string;
+    slug: string;
+    excerpt?: string;
+    date?: Date | string;
+    category?: string;
+    coverImage?: string;
+  }>;
+}
+
+const {
+  siteTitle = "My Space.",
+  posts = []
+} = Astro.props;
+
+// Group posts by year
+const postsByYear = posts.reduce((acc, post) => {
+  if (!post.date) return acc;
+  const date = typeof post.date === 'string' ? new Date(post.date) : post.date;
+  const year = date.getFullYear().toString();
+  if (!acc[year]) {
+    acc[year] = [];
+  }
+  acc[year].push(post);
+  return acc;
+}, {} as Record<string, typeof posts>);
+
+const years = Object.keys(postsByYear).sort((a, b) => parseInt(b) - parseInt(a));
+---
+
+<Layout title={`Archive - ${siteTitle}`}>
+  <Header siteTitle={siteTitle} currentPath="/archive" />
+  
+  <main class="main-container">
+    <div class="md-card">
+      <div class="list-header">All Posts</div>
+      
+      {years.length === 0 ? (
+        <div class="empty-state">
+          <p>No posts yet.</p>
+        </div>
+      ) : (
+        years.map((year) => (
+          <div class="year-group">
+            <h2 class="year-title">{year}</h2>
+            {postsByYear[year].map((post) => (
+              <PostCard
+                title={post.title}
+                href={`/blog/${post.slug}`}
+                excerpt={post.excerpt}
+                date={post.date}
+                category={post.category}
+                coverImage={post.coverImage}
+                slug={post.slug}
+                transitionNamePrefix="archive"
+                source="archive"
+              />
+            ))}
+          </div>
+        ))
+      )}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .main-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .list-header {
+    padding: 20px 24px 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    font-family: var(--font-serif);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .year-group {
+    border-bottom: 2px solid var(--border);
+  }
+
+  .year-group:last-child {
+    border-bottom: none;
+  }
+
+  .year-title {
+    padding: 20px 24px 10px;
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: normal;
+    color: var(--text-sec);
+    margin: 0;
+  }
+
+  .empty-state {
+    padding: 40px 24px;
+    text-align: center;
+    color: var(--text-sec);
+  }
+
+  @media (max-width: 700px) {
+    .main-container {
+      margin: 20px auto;
+      padding: 0 12px;
+    }
+  }
+</style>
+

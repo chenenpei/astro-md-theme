@@ -1,27 +1,28 @@
 ---
-import Layout from '@astro-md-theme/core/Layout.astro';
-import TestComponent from '@astro-md-theme/core/TestComponent.astro';
-import Post from '@astro-md-theme/core/Post.astro';
+import HomePage from '@astro-md-theme/core/templates/HomePage.astro';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+const blogPosts = await getCollection('blog');
+const posts = blogPosts
+  .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => 
+    b.data.pubDate.getTime() - a.data.pubDate.getTime()
+  )
+  .slice(0, 3) // Show only latest 3 posts on homepage
+  .map((post: CollectionEntry<'blog'>) => ({
+    title: post.data.title,
+    slug: post.slug,
+    excerpt: post.data.excerpt,
+    date: post.data.pubDate,
+    category: post.data.category,
+    coverImage: post.data.coverImage,
+  }));
 ---
 
-<Layout title="Theme Demo">
-  <main class="container mx-auto px-4 py-8 max-w-4xl">
-    <h1 class="text-4xl font-bold mb-8">Astro MD Theme Demo</h1>
-    
-    <section class="mb-8">
-      <TestComponent />
-    </section>
-
-    <section class="mb-8">
-      <Post 
-        title="示例文章标题" 
-        date="2024-01-01"
-        description="这是一篇示例文章，用于展示主题的样式效果。"
-      >
-        <p>这里是文章内容。当你看到这段文字时，说明主题包已经成功被引用并正常工作了。</p>
-        <p>接下来你可以开始将你的 HTML Demo 移植到这个主题包中。</p>
-      </Post>
-    </section>
-  </main>
-</Layout>
-
+<HomePage
+  siteTitle="My Space."
+  siteDescription="A minimalist blog theme demo"
+  authorName="Demo Author"
+  authorBio="Programmer & Street Photographer."
+  posts={posts}
+/>

@@ -2,7 +2,6 @@
 import PostDetailPage from '@astro-md-theme/core/templates/PostDetailPage.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
-import { SITE } from '../../config';
 
 export async function getStaticPaths() {
   const blogPosts = await getCollection('blog');
@@ -18,7 +17,7 @@ export async function getStaticPaths() {
           date: post.data.pubDate,
           category: post.data.category,
           readingTime: post.data.readingTime,
-          coverImage: post.data.coverImage || post.data.heroImage,
+          coverImage: post.data.coverImage,
           coverImageAlt: post.data.coverImageAlt,
         },
         content: Content
@@ -31,7 +30,7 @@ const { post, content: Content } = Astro.props;
 ---
 
 <PostDetailPage
-  siteTitle={SITE.title}
+  siteTitle="My Space."
   title={post.title}
   date={post.date}
   category={post.category}

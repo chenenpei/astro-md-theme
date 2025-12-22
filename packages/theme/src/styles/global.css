@@ -1,0 +1,355 @@
+/* Global CSS Variables and Base Styles */
+
+:root {
+  /* Light Mode */
+  --header-bg: #121212;
+  --header-text: #FFFFFF;
+  --page-bg: #F4F4F4;
+  --card-bg: #FFFFFF;
+  --text-main: #121212;
+  --text-sec: #666666;
+  --accent: #0056b3;
+  --border: #e0e0e0;
+  --shadow-card: 0 2px 5px rgba(0, 0, 0, 0.08);
+  --shadow-paper: 0 8px 30px rgba(0, 0, 0, 0.12);
+
+  /* Fonts */
+  --font-serif: "Georgia", "Noto Serif SC", "Songti SC", "SimSun", serif;
+  --font-sans: "Inter", -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+}
+
+[data-theme="dark"] {
+  --header-bg: #000000;
+  --header-text: #E0E0E0;
+  --page-bg: #121212;
+  --card-bg: #1E1E1E;
+  --text-main: #E0E0E0;
+  --text-sec: #AAAAAA;
+  --accent: #90CAF9;
+  --border: #333333;
+  --shadow-card: 0 2px 5px rgba(0, 0, 0, 0.5);
+  --shadow-paper: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-sans);
+}
+
+body {
+  background-color: var(--page-bg);
+  color: var(--text-main);
+  transition: background-color 0.3s, color 0.3s;
+  line-height: 1.6;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+}
+
+/* Card Styles */
+.md-card {
+  background: var(--card-bg);
+  border-radius: 4px;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  border: 1px solid transparent;
+}
+
+[data-theme="dark"] .md-card {
+  border-color: #333;
+}
+
+/* Paper Sheet (for article detail pages) */
+.paper-sheet {
+  position: relative;
+  z-index: 10;
+  max-width: 720px;
+  margin: 120px auto 60px;
+  background: var(--card-bg);
+  min-height: 800px;
+  padding: 60px;
+  box-shadow: var(--shadow-paper);
+  border-radius: 2px;
+}
+
+/* Article Header Strip (dark background for detail pages) */
+.article-header-strip {
+  background-color: var(--header-bg);
+  height: 350px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 700px) {
+  .paper-sheet {
+    width: auto;
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-top: 80px;
+    padding: 30px 20px;
+  }
+}
+
+/* View Transition Animations */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+}
+
+/* Shared element transitions */
+::view-transition-old(post-image-*),
+::view-transition-new(post-image-*) {
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::view-transition-old(post-title-*),
+::view-transition-new(post-title-*) {
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Additional prose styling for better Material Design alignment */
+.prose {
+  /* Force spacing for headings and paragraphs */
+  p {
+    margin-top: 1.5em !important;
+    margin-bottom: 1.5em !important;
+  }
+  
+  h1 {
+    margin-top: 2.5em !important;
+    margin-bottom: 1.5em !important;
+  }
+  
+  h2 {
+    margin-top: 2.5em !important;
+    margin-bottom: 1.5em !important;
+  }
+  
+  h3 {
+    margin-top: 2em !important;
+    margin-bottom: 1.25em !important;
+  }
+  
+  h4 {
+    margin-top: 2em !important;
+    margin-bottom: 1.25em !important;
+  }
+  
+  h5 {
+    margin-top: 1.75em !important;
+    margin-bottom: 1em !important;
+  }
+  
+  h6 {
+    margin-top: 1.75em !important;
+    margin-bottom: 1em !important;
+  }
+  
+  /* Ensure proper list styling with inside positioning */
+  ul {
+    list-style-position: inside !important;
+    padding-left: 0 !important;
+  }
+  
+  ol {
+    list-style-position: inside !important;
+    padding-left: 0 !important;
+  }
+  
+  ul > li::marker {
+    color: var(--text-sec);
+  }
+  
+  ol > li::marker {
+    color: var(--text-sec);
+  }
+  
+  ul > li {
+    padding-left: 0.5rem;
+  }
+  
+  ol > li {
+    padding-left: 0.5rem;
+  }
+  
+  /* Better code block styling - force dark background with padding */
+  pre {
+    background-color: #1e1e1e !important;
+    color: #e0e0e0 !important;
+    padding: 1.25rem !important;
+    border-radius: 4px;
+    overflow-x: auto;
+  }
+  
+  /* Inline code styling */
+  code:not(pre code) {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+    font-family: var(--font-sans);
+  }
+  
+  [data-theme="dark"] & code:not(pre code) {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Ensure tables are properly styled with borders and padding */
+  table {
+    display: table;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  thead th {
+    border: 1px solid var(--border) !important;
+    border-top: 0 !important;
+    border-left: 0 !important;
+    border-right: 1px solid var(--border) !important;
+    border-bottom: 2px solid var(--border) !important;
+    padding: 0.75rem 1rem !important;
+    background-color: rgba(0, 0, 0, 0.02);
+    text-align: left;
+  }
+  
+  thead th:first-child {
+    border-left: 0 !important;
+  }
+  
+  thead th:last-child {
+    border-right: 0 !important;
+  }
+  
+  tbody td {
+    border: 0 !important;
+    border-right: 1px solid var(--border) !important;
+    border-bottom: 1px solid var(--border) !important;
+    padding: 0.75rem 1rem !important;
+  }
+  
+  tbody td:last-child {
+    border-right: 0 !important;
+  }
+  
+  tbody tr:last-child td {
+    border-bottom: 0 !important;
+  }
+  
+  [data-theme="dark"] & thead th {
+    background-color: rgba(255, 255, 255, 0.03);
+  }
+  
+  /* Better blockquote styling with background */
+  blockquote {
+    background-color: rgba(0, 0, 0, 0.03) !important;
+    border-left-width: 4px !important;
+    border-left-style: solid !important;
+    border-left-color: var(--border) !important;
+    padding-left: 1.25rem !important;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    padding-right: 1rem !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    border-radius: 4px !important;
+  }
+  
+  [data-theme="dark"] & blockquote {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+  }
+  
+  /* Task list styling */
+  input[type="checkbox"] {
+    margin-right: 0.5rem;
+  }
+  
+  /* Ensure links use theme accent color */
+  a {
+    color: var(--accent) !important;
+  }
+  
+  a:hover {
+    color: var(--accent) !important;
+    opacity: 0.8;
+  }
+  
+  /* Footnotes styling - ensure number and content on same line */
+  .footnotes {
+    margin-top: 3em;
+    padding-top: 1.5em;
+    border-top: 1px solid var(--border);
+    font-size: 0.9em;
+  }
+  
+  .footnotes ol {
+    list-style-position: outside;
+    padding-left: 1.5em;
+  }
+  
+  .footnotes li {
+    margin-bottom: 0.5em;
+    padding-left: 0;
+  }
+  
+  .footnotes li p {
+    display: inline;
+    margin: 0;
+  }
+  
+  /* Definition list styling */
+  dl {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+  }
+  
+  dt {
+    font-weight: 600;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    color: var(--text-main);
+  }
+  
+  dt:first-child {
+    margin-top: 0;
+  }
+  
+  dd {
+    margin-left: 1.5em;
+    margin-bottom: 0.5em;
+    color: var(--text-sec);
+  }
+  
+  dd + dt {
+    margin-top: 1.5em;
+  }
+  
+  /* Math formula styling */
+  .katex {
+    font-size: 1.1em;
+  }
+  
+  .katex-display {
+    margin: 1.5em 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+}
+
+

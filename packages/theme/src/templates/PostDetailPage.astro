@@ -1,0 +1,121 @@
+---
+import Layout from '../components/Layout.astro';
+import PaperSheet from '../components/PaperSheet.astro';
+
+interface Props {
+  siteTitle?: string;
+  title: string;
+  date?: Date | string;
+  category?: string;
+  readingTime?: string;
+  coverImage?: string;
+  coverImageAlt?: string;
+  content?: any; // Optional: Astro's Content component (content can also be passed via slot)
+  slug?: string;
+}
+
+const {
+  siteTitle = "My Space.",
+  title,
+  date,
+  category,
+  readingTime,
+  coverImage,
+  coverImageAlt = title,
+  content,
+  slug
+} = Astro.props;
+
+// Extract slug from URL if not provided
+const postSlug = slug || Astro.url.pathname.split('/').filter(Boolean).pop() || 'post';
+
+// Get source from query param to determine transition name prefix
+const source = Astro.url.searchParams.get('source') || '';
+const transitionNamePrefix = source ? `${source}-` : '';
+
+// Build transition names with optional prefix
+const titleTransitionName = `${transitionNamePrefix}post-title-${postSlug}`;
+const imageTransitionName = `${transitionNamePrefix}post-image-${postSlug}`;
+
+let formattedDate = '';
+if (date) {
+  const dateObj = typeof date === 'string' ? new Date(date) : date;
+  formattedDate = dateObj.toLocaleDateString('en-US', { 
+    month: 'long', 
+    day: 'numeric',
+    year: 'numeric'
+  });
+}
+
+const metaText = [formattedDate, readingTime].filter(Boolean).join(' · ');
+---
+
+<Layout title={`${title} - ${siteTitle}`}>
+  <PaperSheet>
+    <div class="paper-header">
+      <h1 class="paper-title" transition:name={titleTransitionName}>{title}</h1>
+      {metaText && (
+        <div class="paper-meta">
+          {metaText}
+        </div>
+      )}
+    </div>
+
+    {coverImage && (
+      <img 
+        src={coverImage} 
+        alt={coverImageAlt}
+        class="paper-cover-image"
+        transition:name={imageTransitionName}
+      />
+    )}
+
+    <div class="paper-content prose prose-lg dark:prose-invert max-w-none">
+      <slot />
+    </div>
+  </PaperSheet>
+</Layout>
+
+<style>
+  .paper-header {
+    margin-bottom: 30px;
+  }
+
+  .paper-title {
+    font-family: var(--font-serif);
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    line-height: 1.1;
+  }
+
+  .paper-meta {
+    color: var(--text-sec);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+  }
+
+  .paper-cover-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 30px;
+    border-radius: 4px;
+  }
+
+  .paper-content {
+    /* Typography styles are now handled by Tailwind Typography plugin */
+  }
+
+  @media (max-width: 700px) {
+    .paper-title {
+      font-size: 2rem;
+    }
+
+    .paper-content {
+      font-size: 1rem;
+    }
+  }
+</style>
+

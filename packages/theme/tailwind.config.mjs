@@ -1,11 +1,255 @@
+import typography from '@tailwindcss/typography';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
     './src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        serif: ['"Georgia"', '"Noto Serif SC"', '"Songti SC"', '"SimSun"', 'serif'],
+        sans: ['"Inter"', '-apple-system', '"PingFang SC"', '"Hiragino Sans GB"', '"Microsoft YaHei"', 'system-ui', 'sans-serif'],
+      },
+      colors: {
+        'header-bg': 'var(--header-bg)',
+        'header-text': 'var(--header-text)',
+        'page-bg': 'var(--page-bg)',
+        'card-bg': 'var(--card-bg)',
+        'text-main': 'var(--text-main)',
+        'text-sec': 'var(--text-sec)',
+        'accent': 'var(--accent)',
+        'border': 'var(--border)',
+      },
+      boxShadow: {
+        'card': 'var(--shadow-card)',
+        'paper': 'var(--shadow-paper)',
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: 'none',
+            color: 'var(--text-main)',
+            fontFamily: 'var(--font-serif)',
+            fontSize: '1.1rem',
+            lineHeight: '1.8',
+            '--tw-prose-body': 'var(--text-main)',
+            '--tw-prose-headings': 'var(--text-main)',
+            '--tw-prose-lead': 'var(--text-sec)',
+            '--tw-prose-links': 'var(--accent)',
+            '--tw-prose-bold': 'var(--text-main)',
+            '--tw-prose-counters': 'var(--text-sec)',
+            '--tw-prose-bullets': 'var(--text-sec)',
+            '--tw-prose-hr': 'var(--border)',
+            '--tw-prose-quotes': 'var(--text-main)',
+            '--tw-prose-quote-borders': 'var(--border)',
+            '--tw-prose-captions': 'var(--text-sec)',
+            '--tw-prose-code': 'var(--text-main)',
+            '--tw-prose-pre-code': '#e0e0e0',
+            '--tw-prose-pre-bg': '#1e1e1e',
+            '--tw-prose-th-borders': 'var(--border)',
+            '--tw-prose-td-borders': 'var(--border)',
+            /* Force code block dark background */
+            pre: {
+              backgroundColor: '#1e1e1e !important',
+              color: '#e0e0e0 !important',
+            },
+            h1: {
+              fontFamily: 'var(--font-serif)',
+              fontWeight: 'normal',
+            },
+            p: {
+              marginTop: '1.5em',
+              marginBottom: '1.5em',
+            },
+            h1: {
+              fontFamily: 'var(--font-serif)',
+              fontWeight: 'normal',
+              marginTop: '2.5em',
+              marginBottom: '1.5em',
+            },
+            h2: {
+              fontFamily: 'var(--font-serif)',
+              fontWeight: 'normal',
+              marginTop: '2.5em',
+              marginBottom: '1.5em',
+            },
+            h3: {
+              fontFamily: 'var(--font-serif)',
+              fontWeight: 'normal',
+              marginTop: '2em',
+              marginBottom: '1.25em',
+            },
+            h4: {
+              fontFamily: 'var(--font-serif)',
+              fontWeight: 'normal',
+              marginTop: '2em',
+              marginBottom: '1.25em',
+            },
+            h5: {
+              fontFamily: 'var(--font-serif)',
+              fontWeight: 'normal',
+              marginTop: '1.75em',
+              marginBottom: '1em',
+            },
+            h6: {
+              fontFamily: 'var(--font-serif)',
+              fontWeight: 'normal',
+              marginTop: '1.75em',
+              marginBottom: '1em',
+            },
+            'code::before': {
+              content: '""',
+            },
+            'code::after': {
+              content: '""',
+            },
+            'pre code': {
+              backgroundColor: 'transparent',
+              borderWidth: '0',
+              borderRadius: '0',
+              padding: '0',
+              fontWeight: '400',
+              color: 'inherit',
+              fontSize: 'inherit',
+              fontFamily: 'var(--font-sans)',
+            },
+            pre: {
+              backgroundColor: '#1e1e1e !important',
+              color: '#e0e0e0 !important',
+              borderRadius: '4px',
+              padding: '1.25rem',
+              overflowX: 'auto',
+              marginTop: '1.5em',
+              marginBottom: '1.5em',
+            },
+            blockquote: {
+              borderLeftColor: 'var(--tw-prose-quote-borders)',
+              borderLeftWidth: '4px',
+              borderLeftStyle: 'solid',
+              paddingLeft: '1.25rem',
+              paddingTop: '1rem',
+              paddingBottom: '1rem',
+              paddingRight: '1rem',
+              marginTop: '1.5em',
+              marginBottom: '1.5em',
+              fontStyle: 'normal',
+              backgroundColor: 'rgba(0, 0, 0, 0.03)',
+            },
+            table: {
+              width: '100%',
+              marginTop: '1.5em',
+              marginBottom: '1.5em',
+            },
+            'thead th': {
+              borderColor: 'var(--tw-prose-th-borders)',
+              borderWidth: '1px',
+              borderStyle: 'solid',
+              borderTopWidth: '1px',
+              borderLeftWidth: '1px',
+              borderRightWidth: '1px',
+              borderBottomWidth: '2px',
+              paddingTop: '0.75rem',
+              paddingBottom: '0.75rem',
+              paddingLeft: '0.75rem',
+              paddingRight: '0.75rem',
+            },
+            'thead th:first-child': {
+              borderLeftWidth: '0',
+            },
+            'thead th:last-child': {
+              borderRightWidth: '0',
+            },
+            'tbody td': {
+              borderColor: 'var(--tw-prose-td-borders)',
+              borderWidth: '1px',
+              borderStyle: 'solid',
+              borderTopWidth: '0',
+              borderLeftWidth: '1px',
+              borderRightWidth: '1px',
+              borderBottomWidth: '1px',
+              paddingTop: '0.75rem',
+              paddingBottom: '0.75rem',
+              paddingLeft: '0.75rem',
+              paddingRight: '0.75rem',
+            },
+            'tbody td:first-child': {
+              borderLeftWidth: '0',
+            },
+            'tbody td:last-child': {
+              borderRightWidth: '0',
+            },
+            'tbody tr:last-child td': {
+              borderBottomWidth: '0',
+            },
+            ul: {
+              listStylePosition: 'inside',
+              paddingLeft: '0',
+            },
+            ol: {
+              listStylePosition: 'inside',
+              paddingLeft: '0',
+            },
+            'ul > li': {
+              paddingLeft: '0.5rem',
+            },
+            'ol > li': {
+              paddingLeft: '0.5rem',
+            },
+            'ul > li > p': {
+              marginTop: '0.5em',
+              marginBottom: '0.5em',
+            },
+            'ol > li > p': {
+              marginTop: '0.5em',
+              marginBottom: '0.5em',
+            },
+            a: {
+              color: 'var(--tw-prose-links)',
+              textDecoration: 'underline',
+              textDecorationColor: 'var(--tw-prose-links)',
+              textDecorationThickness: '1px',
+              textUnderlineOffset: '2px',
+            },
+            'a:hover': {
+              color: 'var(--tw-prose-links)',
+              textDecorationThickness: '2px',
+            },
+          },
+        },
+        invert: {
+          css: {
+            color: 'var(--text-main)',
+            '--tw-prose-body': 'var(--text-main)',
+            '--tw-prose-headings': 'var(--text-main)',
+            '--tw-prose-lead': 'var(--text-sec)',
+            '--tw-prose-links': 'var(--accent)',
+            '--tw-prose-bold': 'var(--text-main)',
+            '--tw-prose-counters': 'var(--text-sec)',
+            '--tw-prose-bullets': 'var(--text-sec)',
+            '--tw-prose-hr': 'var(--border)',
+            '--tw-prose-quotes': 'var(--text-main)',
+            '--tw-prose-quote-borders': 'var(--border)',
+            '--tw-prose-captions': 'var(--text-sec)',
+            '--tw-prose-code': 'var(--text-main)',
+            '--tw-prose-pre-code': '#e0e0e0',
+            '--tw-prose-pre-bg': '#1e1e1e',
+            '--tw-prose-th-borders': 'var(--border)',
+            '--tw-prose-td-borders': 'var(--border)',
+            a: {
+              color: 'var(--accent)',
+              textDecoration: 'underline',
+              textDecorationColor: 'var(--accent)',
+            },
+            'a:hover': {
+              color: 'var(--accent)',
+              opacity: '0.8',
+            },
+          },
+        },
+      },
+    },
   },
-  plugins: [],
+  plugins: [typography],
 }
 

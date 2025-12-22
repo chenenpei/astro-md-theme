@@ -1,0 +1,82 @@
+---
+interface Props {
+  name: string;
+  bio: string;
+  avatar?: string;
+  avatarAlt?: string;
+  href?: string;
+}
+
+const { 
+  name, 
+  bio, 
+  avatar,
+  avatarAlt = name,
+  href = "/about"
+} = Astro.props;
+---
+
+<a href={href} class="intro-card">
+  {avatar ? (
+    <img src={avatar} alt={avatarAlt} class="avatar" />
+  ) : (
+    <div class="avatar avatar--placeholder"></div>
+  )}
+  <div class="intro-text">
+    <h2>Hi, I'm {name}</h2>
+    <p>{bio}</p>
+  </div>
+</a>
+
+<style>
+  .intro-card {
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .intro-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+
+  .avatar--placeholder {
+    background-color: #333;
+  }
+
+  [data-theme="dark"] .avatar--placeholder {
+    background-color: #666;
+  }
+
+  .intro-text h2 {
+    margin: 0 0 6px 0;
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: normal;
+  }
+
+  .intro-text p {
+    margin: 0;
+    color: var(--text-sec);
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 700px) {
+    .intro-card {
+      padding: 20px;
+    }
+  }
+</style>
+

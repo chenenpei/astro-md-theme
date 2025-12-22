@@ -1,0 +1,78 @@
+---
+interface Props {
+  backHref?: string;
+  backLabel?: string;
+}
+
+const { 
+  backHref = "/",
+  backLabel = "← Home"
+} = Astro.props;
+---
+
+<div class="article-header-strip"></div>
+
+<article class="paper-sheet">
+  <a href={backHref} class="back-nav">{backLabel}</a>
+  <slot />
+</article>
+
+<style>
+  .article-header-strip {
+    background-color: var(--header-bg);
+    height: 350px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+
+  .paper-sheet {
+    position: relative;
+    z-index: 10;
+    max-width: 720px;
+    margin: 120px auto 60px;
+    background: var(--card-bg);
+    min-height: 800px;
+    padding: 60px;
+    box-shadow: var(--shadow-paper);
+    border-radius: 2px;
+  }
+
+  .back-nav {
+    position: absolute;
+    top: -50px;
+    left: 0;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    font-family: var(--font-sans);
+    transition: color 0.2s;
+  }
+
+  .back-nav:hover {
+    color: #fff;
+  }
+
+  @media (max-width: 700px) {
+    .paper-sheet {
+      width: auto;
+      margin-left: 12px;
+      margin-right: 12px;
+      margin-top: 80px;
+      padding: 30px 20px;
+    }
+
+    .back-nav {
+      left: 12px;
+      top: -40px;
+    }
+  }
+</style>
+

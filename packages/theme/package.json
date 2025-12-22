@@ -4,22 +4,32 @@
   "type": "module",
   "exports": {
     "./Layout.astro": "./src/components/Layout.astro",
+    "./Header.astro": "./src/components/Header.astro",
+    "./PostCard.astro": "./src/components/PostCard.astro",
+    "./IntroCard.astro": "./src/components/IntroCard.astro",
+    "./PaperSheet.astro": "./src/components/PaperSheet.astro",
     "./Post.astro": "./src/components/Post.astro",
     "./TestComponent.astro": "./src/components/TestComponent.astro",
+    "./templates/HomePage.astro": "./src/templates/HomePage.astro",
+    "./templates/PostDetailPage.astro": "./src/templates/PostDetailPage.astro",
+    "./templates/ArchivePage.astro": "./src/templates/ArchivePage.astro",
+    "./templates/AboutPage.astro": "./src/templates/AboutPage.astro",
+    "./styles/global.css": "./src/styles/global.css",
     "./tailwind.config": "./tailwind.config.mjs"
   },
   "files": [
     "src",
-    "tailwind.config.mjs"
+    "tailwind.config.mjs",
+    "src/styles"
   ],
   "peerDependencies": {
     "astro": "^4.0.0",
     "tailwindcss": "^3.0.0"
   },
   "devDependencies": {
+    "@astrojs/tailwind": "^5.1.0",
+    "@tailwindcss/typography": "^0.5.19",
     "astro": "^4.0.0",
-    "tailwindcss": "^3.4.0",
-    "@astrojs/tailwind": "^5.1.0"
+    "tailwindcss": "^3.4.0"
   }
 }
-

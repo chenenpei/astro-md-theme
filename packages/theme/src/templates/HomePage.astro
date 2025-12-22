@@ -1,0 +1,96 @@
+---
+import Layout from '../components/Layout.astro';
+import Header from '../components/Header.astro';
+import IntroCard from '../components/IntroCard.astro';
+import PostCard from '../components/PostCard.astro';
+
+interface Props {
+  siteTitle?: string;
+  siteDescription?: string;
+  authorName?: string;
+  authorBio?: string;
+  authorAvatar?: string;
+  posts: Array<{
+    title: string;
+    slug: string;
+    excerpt?: string;
+    date?: Date | string;
+    category?: string;
+    coverImage?: string;
+  }>;
+}
+
+const {
+  siteTitle = "My Space.",
+  siteDescription = "A minimalist blog",
+  authorName = "Your Name",
+  authorBio = "Programmer & Street Photographer.",
+  authorAvatar,
+  posts = []
+} = Astro.props;
+---
+
+<Layout title={siteTitle} description={siteDescription}>
+  <Header siteTitle={siteTitle} currentPath="/" />
+  
+  <main class="main-container">
+    <div class="md-card">
+      <IntroCard 
+        name={authorName}
+        bio={authorBio}
+        avatar={authorAvatar}
+      />
+    </div>
+
+    <div class="md-card">
+      <div class="list-header">Latest Posts</div>
+      
+      {posts.map((post) => (
+        <PostCard
+          title={post.title}
+          href={`/blog/${post.slug}`}
+          excerpt={post.excerpt}
+          date={post.date}
+          category={post.category}
+          coverImage={post.coverImage}
+          slug={post.slug}
+        />
+      ))}
+      
+      {posts.length > 0 && (
+        <div style="padding: 15px; text-align: center;">
+          <a href="/archive" style="color: var(--accent); text-decoration: none; font-weight: bold; font-size: 0.9rem;">
+            VIEW ALL ARCHIVES
+          </a>
+        </div>
+      )}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .main-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .list-header {
+    padding: 20px 24px 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    font-family: var(--font-serif);
+    border-bottom: 1px solid var(--border);
+  }
+
+  @media (max-width: 700px) {
+    .main-container {
+      margin: 20px auto;
+      padding: 0 12px;
+    }
+  }
+</style>
+

@@ -1,5 +1,5 @@
 ---
-import HomePage from '@astro-md-theme/core/templates/HomePage.astro';
+import ArchivePage from '@astro-md-theme/core/templates/ArchivePage.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import { SITE } from '../config';
@@ -9,7 +9,6 @@ const posts = blogPosts
   .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => 
     b.data.pubDate.getTime() - a.data.pubDate.getTime()
   )
-  .slice(0, 5) // Show latest 5 posts on homepage
   .map((post: CollectionEntry<'blog'>) => ({
     title: post.data.title,
     slug: post.slug,
@@ -20,12 +19,8 @@ const posts = blogPosts
   }));
 ---
 
-<HomePage
+<ArchivePage
   siteTitle={SITE.title}
-  siteDescription={SITE.description}
-  authorName={SITE.author?.name}
-  authorBio={SITE.author?.bio}
-  authorAvatar={SITE.author?.avatar}
   posts={posts}
 />
 

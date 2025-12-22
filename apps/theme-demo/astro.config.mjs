@@ -1,5 +1,8 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import remarkDefinitionList from 'remark-definition-list';
 
 export default defineConfig({
   integrations: [
@@ -8,5 +11,9 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
   ],
+  markdown: {
+    remarkPlugins: [remarkMath, remarkDefinitionList],
+    rehypePlugins: [rehypeKatex],
+  },
 });
 

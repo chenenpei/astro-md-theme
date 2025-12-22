@@ -1,0 +1,182 @@
+---
+interface Props {
+  siteTitle?: string;
+  currentPath?: string;
+}
+
+const { 
+  siteTitle = "My Space.",
+  currentPath = "/"
+} = Astro.props;
+
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/archive", label: "Articles" },
+  { href: "/about", label: "About" },
+];
+
+const isActive = (href: string) => {
+  if (href === "/") {
+    return currentPath === "/";
+  }
+  return currentPath.startsWith(href);
+};
+---
+
+<header class="md-header">
+  <button 
+    class="theme-toggle-header" 
+    id="theme-toggle"
+    aria-label="Toggle dark mode"
+  >
+    <span id="theme-toggle-text">Dark Mode</span>
+  </button>
+  
+  <h1 class="blog-title">{siteTitle}</h1>
+  <nav class="nav-tabs">
+    {navItems.map((item) => (
+      <a 
+        href={item.href} 
+        class={`nav-link ${isActive(item.href) ? 'active' : ''}`}
+      >
+        {item.label}
+      </a>
+    ))}
+  </nav>
+</header>
+
+<script>
+  function updateThemeButton() {
+    const theme = document.documentElement.getAttribute('data-theme') || 'light';
+    const text = document.getElementById('theme-toggle-text');
+    if (text) {
+      text.textContent = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
+    }
+  }
+
+  function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    if (document.startViewTransition) {
+      document.startViewTransition(() => {
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeButton();
+      });
+    } else {
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeButton();
+    }
+  }
+
+  function initTheme() {
+    // Apply saved theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeButton();
+
+    // Attach event listener
+    const toggleBtn = document.getElementById('theme-toggle');
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', toggleTheme);
+    }
+  }
+
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTheme);
+  } else {
+    initTheme();
+  }
+
+  // Re-initialize after view transitions (for Astro)
+  document.addEventListener('astro:page-load', initTheme);
+</script>
+
+<style>
+  .md-header {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    padding: 40px 20px 0 20px;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 1;
+  }
+
+  .theme-toggle-header {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--header-text);
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-sans);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .theme-toggle-header:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #fff;
+  }
+
+  .blog-title {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    font-weight: normal;
+    margin: 20px 0 0 0;
+    letter-spacing: -1px;
+  }
+
+  .nav-tabs {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 0;
+  }
+
+  .nav-link {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.85rem;
+    padding-bottom: 12px;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.2s;
+  }
+
+  .nav-link.active {
+    color: #fff;
+    border-bottom-color: var(--accent);
+  }
+
+  .nav-link:hover {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  @media (max-width: 700px) {
+    .md-header {
+      padding-top: 20px;
+    }
+
+    .blog-title {
+      font-size: 2rem;
+    }
+  }
+</style>
+

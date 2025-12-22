@@ -1,0 +1,17 @@
+{
+  "name": "astro-md-theme-monorepo",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --filter './apps/*' dev",
+    "dev:demo": "pnpm --filter theme-demo dev",
+    "dev:blog": "pnpm --filter my-blog dev",
+    "build": "pnpm --filter './apps/*' build",
+    "preview": "pnpm --filter './apps/*' preview"
+  },
+  "devDependencies": {
+    "pnpm": "^9.0.0"
+  }
+}
+

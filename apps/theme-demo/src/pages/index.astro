@@ -1,0 +1,27 @@
+---
+import Layout from '@astro-md-theme/core/Layout.astro';
+import TestComponent from '@astro-md-theme/core/TestComponent.astro';
+import Post from '@astro-md-theme/core/Post.astro';
+---
+
+<Layout title="Theme Demo">
+  <main class="container mx-auto px-4 py-8 max-w-4xl">
+    <h1 class="text-4xl font-bold mb-8">Astro MD Theme Demo</h1>
+    
+    <section class="mb-8">
+      <TestComponent />
+    </section>
+
+    <section class="mb-8">
+      <Post 
+        title="示例文章标题" 
+        date="2024-01-01"
+        description="这是一篇示例文章，用于展示主题的样式效果。"
+      >
+        <p>这里是文章内容。当你看到这段文字时，说明主题包已经成功被引用并正常工作了。</p>
+        <p>接下来你可以开始将你的 HTML Demo 移植到这个主题包中。</p>
+      </Post>
+    </section>
+  </main>
+</Layout>
+

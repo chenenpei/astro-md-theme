@@ -1,0 +1,21 @@
+---
+interface Props {
+  title: string;
+  date?: string;
+  description?: string;
+}
+
+const { title, date, description } = Astro.props;
+---
+
+<article class="prose prose-lg max-w-none">
+  {date && (
+    <time class="text-gray-500 text-sm">{date}</time>
+  )}
+  <h1 class="text-3xl font-bold mb-4">{title}</h1>
+  {description && (
+    <p class="text-gray-600 mb-6">{description}</p>
+  )}
+  <slot />
+</article>
+

@@ -1,11 +1,11 @@
 // Site configuration
 export const SITE = {
-  title: 'My Blog',
+  title: "EChen's Blog",
   description: 'A personal blog built with Astro MD Theme',
   author: {
-    name: 'Your Name',
-    bio: 'Programmer & Writer',
-    avatar: undefined,
+    name: 'chenenpei',
+    bio: 'Programmer & Street Photographer',
+    avatar: '/profile.jpg',
   },
   url: 'https://example.com',
 };

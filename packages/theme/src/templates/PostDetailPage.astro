@@ -51,7 +51,7 @@ const metaText = [formattedDate, readingTime].filter(Boolean).join(' · ');
 ---
 
 <Layout title={`${title} - ${siteTitle}`}>
-  <PaperSheet>
+  <PaperSheet backHref="/archive" backLabel="← Archive">
     <div class="paper-header">
       <h1 class="paper-title" transition:name={titleTransitionName}>{title}</h1>
       {metaText && (

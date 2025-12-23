@@ -10,6 +10,12 @@ interface Props {
   authorName?: string;
   authorBio?: string;
   authorAvatar?: string;
+  socials?: {
+    x?: string;
+    instagram?: string;
+    github?: string;
+    email?: string;
+  };
   posts: Array<{
     title: string;
     slug: string;
@@ -26,6 +32,7 @@ const {
   authorName = "Your Name",
   authorBio = "Programmer & Street Photographer.",
   authorAvatar,
+  socials,
   posts = []
 } = Astro.props;
 ---
@@ -39,6 +46,7 @@ const {
         name={authorName}
         bio={authorBio}
         avatar={authorAvatar}
+        socials={socials}
       />
     </div>
 
@@ -58,11 +66,9 @@ const {
       ))}
       
       {posts.length > 0 && (
-        <div style="padding: 15px; text-align: center;">
-          <a href="/archive" style="color: var(--accent); text-decoration: none; font-weight: bold; font-size: 0.9rem;">
-            VIEW ALL ARCHIVES
-          </a>
-        </div>
+        <a href="/archive" class="archive-link">
+          VIEW ALL ARCHIVES
+        </a>
       )}
     </div>
   </main>
@@ -84,6 +90,25 @@ const {
     font-weight: bold;
     font-family: var(--font-serif);
     border-bottom: 1px solid var(--border);
+  }
+
+  .archive-link {
+    display: block;
+    padding: 15px;
+    text-align: center;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+  }
+
+  .archive-link:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+
+  [data-theme="dark"] .archive-link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
   }
 
   @media (max-width: 700px) {

@@ -2,6 +2,7 @@
 import HomePage from '@astro-md-theme/core/templates/HomePage.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
+import { SITE } from '../config';
 
 const blogPosts = await getCollection('blog');
 const posts = blogPosts
@@ -20,9 +21,11 @@ const posts = blogPosts
 ---
 
 <HomePage
-  siteTitle="My Space."
-  siteDescription="A minimalist blog theme demo"
-  authorName="Demo Author"
-  authorBio="Programmer & Street Photographer."
+  siteTitle={SITE.title}
+  siteDescription={SITE.description}
+  authorName={SITE.author?.name}
+  authorBio={SITE.author?.bio}
+  authorAvatar={SITE.author?.avatar}
+  socials={SITE.socials}
   posts={posts}
 />

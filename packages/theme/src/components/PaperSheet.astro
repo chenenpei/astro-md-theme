@@ -2,18 +2,24 @@
 interface Props {
   backHref?: string;
   backLabel?: string;
+  useBackButton?: boolean;
 }
 
 const { 
   backHref = "/",
-  backLabel = "← Home"
+  backLabel = "← Home",
+  useBackButton = false
 } = Astro.props;
 ---
 
 <div class="article-header-strip"></div>
 
 <article class="paper-sheet">
-  <a href={backHref} class="back-nav">{backLabel}</a>
+  {useBackButton ? (
+    <button type="button" onclick="history.back()" class="back-nav">{backLabel}</button>
+  ) : (
+    <a href={backHref} class="back-nav">{backLabel}</a>
+  )}
   <slot />
 </article>
 
@@ -54,6 +60,9 @@ const {
     text-decoration: none;
     font-family: var(--font-sans);
     transition: color 0.2s;
+    background: none;
+    border: none;
+    padding: 0;
   }
 
   .back-nav:hover {

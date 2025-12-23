@@ -1,78 +1,78 @@
 ---
-title: Markdown 格式展示
-excerpt: 这是一篇展示各种 Markdown 格式的文章，用于测试主题对不同内容的渲染效果
-pubDate: 2024-01-15
+title: Markdown Format Showcase
+excerpt: This article demonstrates various Markdown formats for testing how the theme renders different content
+pubDate: 2025-01-15
 category: Demo
 readingTime: 10 mins
 coverImage: https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&h=400&fit=crop
 coverImageAlt: Markdown showcase
 ---
 
-# Markdown 格式展示
+# Markdown Format Showcase
 
-这是一篇展示各种 Markdown 格式的文章，用于测试主题对不同内容的渲染效果。本文将包含尽可能丰富的 Markdown 元素。
+This article demonstrates various Markdown formats for testing how the theme renders different content. This article will include as many Markdown elements as possible.
 
-## 标题层级
+## Heading Levels
 
-这是 H2 标题，下面是不同层级的标题示例：
+This is an H2 heading, below are examples of different heading levels:
 
-### H3 标题
+### H3 Heading
 
-#### H4 标题
+#### H4 Heading
 
-##### H5 标题
+##### H5 Heading
 
-###### H6 标题
+###### H6 Heading
 
-## 文本格式
+## Text Formatting
 
-这是一段普通文本，包含 **粗体文本**、*斜体文本*、***粗斜体文本***、~~删除线文本~~ 和 `行内代码`。
+This is a paragraph of regular text, containing **bold text**, *italic text*, ***bold italic text***, ~~strikethrough text~~, and `inline code`.
 
-还可以使用 `代码片段` 在句子中，比如 `const example = 'hello'`。
+You can also use `code snippets` within sentences, such as `const example = 'hello'`.
 
-## 列表
+## Lists
 
-### 无序列表
+### Unordered List
 
-- 第一项
-- 第二项
-- 第三项
-  - 嵌套项 1
-  - 嵌套项 2
-    - 更深层嵌套
-- 第四项
+- First item
+- Second item
+- Third item
+  - Nested item 1
+  - Nested item 2
+    - Deeper nesting
+- Fourth item
 
-### 有序列表
+### Ordered List
 
-1. 第一步
-2. 第二步
-3. 第三步
-   1. 子步骤 A
-   2. 子步骤 B
-4. 第四步
+1. First step
+2. Second step
+3. Third step
+   1. Sub-step A
+   2. Sub-step B
+4. Fourth step
 
-### 任务列表
+### Task List
 
-- [x] 已完成的任务
-- [x] 另一个已完成的任务
-- [ ] 未完成的任务
-- [ ] 另一个未完成的任务
+- [x] Completed task
+- [x] Another completed task
+- [ ] Incomplete task
+- [ ] Another incomplete task
 
-## 引用
+## Blockquotes
 
-> 这是一段引用文本。引用可以包含多个段落。
+> This is a blockquote. Blockquotes can contain multiple paragraphs.
 >
-> 这是引用中的第二段。
+> This is the second paragraph in the blockquote.
 
-### 嵌套引用
+### Nested Blockquotes
 
-> 这是外层引用
+> This is the outer blockquote
 >
-> > 这是内层引用
+> > This is the inner blockquote
 > >
-> > 可以继续嵌套
+> > Can continue nesting
 
-## 代码块
+## Code Blocks
 
 ### JavaScript
 
@@ -90,13 +90,13 @@ console.log(message);
 
 ```python
 def fibonacci(n):
-    """生成斐波那契数列"""
+    """Generate Fibonacci sequence"""
     a, b = 0, 1
     for _ in range(n):
         yield a
         a, b = b, a + b
 
-# 使用示例
+# Usage example
 for num in fibonacci(10):
     print(num)
 ```
@@ -115,68 +115,68 @@ for num in fibonacci(10):
 }
 ```
 
-### 无语言标识的代码块
+### Code Block Without Language Identifier
 
 ```
-这是没有语法高亮的代码块
-可以用于显示纯文本或配置文件
+This is a code block without syntax highlighting
+Can be used to display plain text or configuration files
 ```
 
-## 表格
+## Tables
 
-| 功能 | 支持 | 说明 |
-|------|:----:|------|
-| 粗体 | ✅ | `**文本**` |
-| 斜体 | ✅ | `*文本*` |
-| 代码 | ✅ | `` `代码` `` |
-| 链接 | ✅ | `[文本](url)` |
-| 图片 | ✅ | `![alt](url)` |
+| Feature | Support | Description |
+|--------|:-------:|------------|
+| Bold | ✅ | `**text**` |
+| Italic | ✅ | `*text*` |
+| Code | ✅ | `` `code` `` |
+| Link | ✅ | `[text](url)` |
+| Image | ✅ | `![alt](url)` |
 
-### 对齐方式
+### Alignment
 
-| 左对齐 | 居中 | 右对齐 |
-|:-------|:----:|-------:|
-| 内容 1 | 内容 2 | 内容 3 |
-| 更长的内容 | 中等 | 短 |
+| Left Align | Center | Right Align |
+|:----------|:------:|-----------:|
+| Content 1 | Content 2 | Content 3 |
+| Longer content | Medium | Short |
 
-## 链接
+## Links
 
-这是一个[内联链接](https://astro.build)到 Astro 官网。
+This is an [inline link](https://astro.build) to the Astro website.
 
-这是一个[带标题的链接](https://github.com "GitHub")。
+This is a [link with title](https://github.com "GitHub").
 
-这是[相对路径链接](../archive)到归档页面。
+This is a [relative path link](../archive) to the archive page.
 
-## 图片
+## Images
 
-![示例图片](https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=300&fit=crop "这是一张示例图片")
+![Example Image](https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=300&fit=crop "This is an example image")
 
-### 带链接的图片
+### Image with Link
 
 [![Astro Logo](https://astro.build/assets/press/astro-logo-dark.svg)](https://astro.build)
 
-## 水平分割线
+## Horizontal Rules
 
 ---
 
-上面是一条水平分割线。
+Above is a horizontal rule.
 
 ---
 
-## 混合内容示例
+## Mixed Content Example
 
-下面是一个包含多种格式的段落：
+Below is a paragraph containing various formats:
 
-> 这是一段引用，包含 **粗体**、*斜体* 和 `代码`。还可以包含[链接](https://example.com)。
+> This is a blockquote containing **bold**, *italic*, and `code`. It can also contain [links](https://example.com).
 >
-> - 引用中的列表项 1
-> - 引用中的列表项 2
->   1. 嵌套的有序列表
->   2. 另一个嵌套项
+> - List item 1 in blockquote
+> - List item 2 in blockquote
+>   1. Nested ordered list
+>   2. Another nested item
 
-### 代码与文本混合
+### Code and Text Mixed
 
-在 JavaScript 中，我们可以这样写：
+In JavaScript, we can write:
 
 ```javascript
 const theme = {
@@ -186,72 +186,72 @@ const theme = {
 };
 ```
 
-然后使用 `theme.name` 来访问主题名称。
+Then use `theme.name` to access the theme name.
 
-## 转义字符
+## Escaped Characters
 
-如果需要显示 Markdown 语法字符本身，可以使用反斜杠转义：
+If you need to display Markdown syntax characters themselves, you can escape them with backslashes:
 
-\*这不是斜体\*
+\*This is not italic\*
 
-\*\*这不是粗体\*\*
+\*\*This is not bold\*\*
 
-\`这不是代码\`
+\`This is not code\`
 
-## 数学公式（如果支持）
+## Math Formulas (if supported)
 
-如果主题支持数学公式，可以这样写：
+If the theme supports math formulas, you can write:
 
-行内公式：$E = mc^2$
+Inline formula: $E = mc^2$
 
-块级公式：
+Block formula:
 
 $$
 \sum_{i=1}^{n} i = \frac{n(n+1)}{2}
 $$
 
-## HTML 标签
+## HTML Tags
 
-Markdown 也支持直接使用 HTML：
+Markdown also supports using HTML directly:
 
 <div style="background: #f0f0f0; padding: 1rem; border-radius: 4px; margin: 1rem 0;">
-  <p>这是一个使用 HTML 的示例块。</p>
-  <p>可以包含 <strong>粗体</strong> 和 <em>斜体</em>。</p>
+  <p>This is an example block using HTML.</p>
+  <p>Can contain <strong>bold</strong> and <em>italic</em>.</p>
 </div>
 
-## 脚注
+## Footnotes
 
-这是一个带脚注的句子[^1]。
+This is a sentence with a footnote[^1].
 
-这是另一个脚注[^note]。
+This is another footnote[^note].
 
-[^1]: 这是第一个脚注的内容。
+[^1]: This is the content of the first footnote.
 
-[^note]: 这是命名脚注的内容，可以包含**格式**和[链接](https://example.com)。
+[^note]: This is the content of a named footnote, which can contain **formatting** and [links](https://example.com).
 
-## 定义列表（如果支持）
+## Definition Lists (if supported)
 
-术语 1
-: 这是术语 1 的定义。
+Term 1
+: This is the definition of term 1.
 
-术语 2
-: 这是术语 2 的定义。
-: 可以有多个定义。
+Term 2
+: This is the definition of term 2.
+: Can have multiple definitions.
 
-## 总结
+## Summary
 
-这篇文章展示了 Markdown 的各种格式，包括：
+This article demonstrates various Markdown formats, including:
 
-- ✅ 标题（H1-H6）
-- ✅ 文本格式（粗体、斜体、删除线、行内代码）
-- ✅ 列表（有序、无序、嵌套、任务列表）
-- ✅ 引用（包括嵌套引用）
-- ✅ 代码块（多种语言）
-- ✅ 表格
-- ✅ 链接
-- ✅ 图片
-- ✅ 水平分割线
-- ✅ HTML 标签
-- ✅ 脚注
+- ✅ Headings (H1-H6)
+- ✅ Text formatting (bold, italic, strikethrough, inline code)
+- ✅ Lists (ordered, unordered, nested, task lists)
+- ✅ Blockquotes (including nested blockquotes)
+- ✅ Code blocks (multiple languages)
+- ✅ Tables
+- ✅ Links
+- ✅ Images
+- ✅ Horizontal rules
+- ✅ HTML tags
+- ✅ Footnotes
 
-希望这些示例能帮助你了解主题对不同 Markdown 内容的渲染效果！
+Hope these examples help you understand how the theme renders different Markdown content!

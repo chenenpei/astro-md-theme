@@ -122,51 +122,25 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Additional prose styling for better Material Design alignment */
 .prose {
-  /* Force spacing for headings and paragraphs */
+  h2, h3, h4, h5, h6 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+  }
+
   p {
-    margin-top: 1.5em !important;
-    margin-bottom: 1.5em !important;
-  }
-  
-  h1 {
-    margin-top: 2.5em !important;
-    margin-bottom: 1.5em !important;
-  }
-  
-  h2 {
-    margin-top: 2.5em !important;
-    margin-bottom: 1.5em !important;
-  }
-  
-  h3 {
-    margin-top: 2em !important;
-    margin-bottom: 1.25em !important;
-  }
-  
-  h4 {
-    margin-top: 2em !important;
-    margin-bottom: 1.25em !important;
-  }
-  
-  h5 {
-    margin-top: 1.75em !important;
-    margin-bottom: 1em !important;
-  }
-  
-  h6 {
-    margin-top: 1.75em !important;
-    margin-bottom: 1em !important;
-  }
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+  } 
   
   /* Ensure proper list styling with inside positioning */
   ul {
-    list-style-position: inside !important;
-    padding-left: 0 !important;
+    list-style-position: inside;
+    padding-left: 0;
   }
   
   ol {
-    list-style-position: inside !important;
-    padding-left: 0 !important;
+    list-style-position: inside;
+    padding-left: 0;
   }
   
   ul > li::marker {
@@ -187,9 +161,8 @@ h1, h2, h3, h4, h5, h6 {
   
   /* Better code block styling - force dark background with padding */
   pre {
-    background-color: #1e1e1e !important;
-    color: #e0e0e0 !important;
-    padding: 1.25rem !important;
+    color: #e0e0e0;
+    padding: 1.25rem;
     border-radius: 4px;
     overflow-x: auto;
   }
@@ -219,37 +192,37 @@ h1, h2, h3, h4, h5, h6 {
   }
   
   thead th {
-    border: 1px solid var(--border) !important;
-    border-top: 0 !important;
-    border-left: 0 !important;
-    border-right: 1px solid var(--border) !important;
-    border-bottom: 2px solid var(--border) !important;
-    padding: 0.75rem 1rem !important;
+    border: 1px solid var(--border);
+    border-top: 0;
+    border-left: 0;
+    border-right: 1px solid var(--border);
+    border-bottom: 2px solid var(--border);
+    padding: 0.75rem 1rem;
     background-color: rgba(0, 0, 0, 0.02);
     text-align: left;
   }
   
   thead th:first-child {
-    border-left: 0 !important;
+    border-left: 0;
   }
   
   thead th:last-child {
-    border-right: 0 !important;
+    border-right: 0;
   }
   
   tbody td {
-    border: 0 !important;
-    border-right: 1px solid var(--border) !important;
-    border-bottom: 1px solid var(--border) !important;
-    padding: 0.75rem 1rem !important;
+    border: 0;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 1rem;
   }
   
   tbody td:last-child {
-    border-right: 0 !important;
+    border-right: 0;
   }
   
   tbody tr:last-child td {
-    border-bottom: 0 !important;
+    border-bottom: 0;
   }
   
   [data-theme="dark"] & thead th {
@@ -258,21 +231,21 @@ h1, h2, h3, h4, h5, h6 {
   
   /* Better blockquote styling with background */
   blockquote {
-    background-color: rgba(0, 0, 0, 0.03) !important;
-    border-left-width: 4px !important;
-    border-left-style: solid !important;
-    border-left-color: var(--border) !important;
-    padding-left: 1.25rem !important;
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
-    padding-right: 1rem !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    border-radius: 4px !important;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-left-width: 4px;
+    border-left-style: solid;
+    border-left-color: var(--border);
+    padding-left: 1.25rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-right: 1rem;
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 4px;
   }
   
   [data-theme="dark"] & blockquote {
-    background-color: rgba(255, 255, 255, 0.05) !important;
+    background-color: rgba(255, 255, 255, 0.05);
   }
   
   /* Task list styling */
@@ -282,11 +255,11 @@ h1, h2, h3, h4, h5, h6 {
   
   /* Ensure links use theme accent color */
   a {
-    color: var(--accent) !important;
+    color: var(--accent);
   }
   
   a:hover {
-    color: var(--accent) !important;
+    color: var(--accent);
     opacity: 0.8;
   }
   
@@ -297,59 +270,76 @@ h1, h2, h3, h4, h5, h6 {
     border-top: 1px solid var(--border);
     font-size: 0.9em;
   }
-  
+
   .footnotes ol {
     list-style-position: outside;
     padding-left: 1.5em;
   }
-  
+
   .footnotes li {
     margin-bottom: 0.5em;
     padding-left: 0;
   }
-  
+
   .footnotes li p {
     display: inline;
     margin: 0;
   }
-  
+
   /* Definition list styling */
   dl {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
   }
-  
+
   dt {
     font-weight: 600;
     margin-top: 1em;
     margin-bottom: 0.5em;
     color: var(--text-main);
   }
-  
+
   dt:first-child {
     margin-top: 0;
   }
-  
+
   dd {
     margin-left: 1.5em;
     margin-bottom: 0.5em;
     color: var(--text-sec);
   }
-  
+
   dd + dt {
     margin-top: 1.5em;
   }
-  
+
   /* Math formula styling */
   .katex {
     font-size: 1.1em;
   }
-  
+
   .katex-display {
     margin: 1.5em 0;
     overflow-x: auto;
     overflow-y: hidden;
   }
+
+  /* Responsive images - prevent overflow on mobile */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Ensure images in content area respect container width */
+  &.paper-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  } 
+
+  /* Hide H1 in article content to prevent duplicate title */
+  /* The page title is already rendered by the template */
+  &.paper-content h1{
+    display: none;
+  }
 }
-
-

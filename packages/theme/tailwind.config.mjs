@@ -54,10 +54,6 @@ export default {
               backgroundColor: '#1e1e1e !important',
               color: '#e0e0e0 !important',
             },
-            h1: {
-              fontFamily: 'var(--font-serif)',
-              fontWeight: 'normal',
-            },
             p: {
               marginTop: '1.5em',
               marginBottom: '1.5em',

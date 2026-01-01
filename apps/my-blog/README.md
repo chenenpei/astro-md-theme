@@ -57,12 +57,12 @@ This is my first blog post about Astro...
 
 ## 🔄 Updating the Theme
 
-Since this blog uses `@astro-md-theme/core` as a workspace dependency, theme updates are automatically available:
+Since this blog uses `@chenenpei/astro-md-theme` as a workspace dependency, theme updates are automatically available:
 
 1. **Pull latest changes** from the repository
 2. **Update theme package** (if published separately):
    ```bash
-   pnpm update @astro-md-theme/core
+   pnpm update @chenenpei/astro-md-theme
    ```
 3. **Restart dev server** to see changes:
    ```bash

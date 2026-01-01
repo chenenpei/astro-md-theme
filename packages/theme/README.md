@@ -1,4 +1,4 @@
-# @astro-md-theme/core
+# @chenenpei/astro-md-theme
 
 Core theme package for Astro MD Theme - A minimalist blog theme built with Astro and Tailwind CSS.
 
@@ -7,15 +7,15 @@ Core theme package for Astro MD Theme - A minimalist blog theme built with Astro
 In your Astro project, install this package:
 
 ```bash
-pnpm add @astro-md-theme/core
+pnpm add @chenenpei/astro-md-theme
 ```
 
 Or if you're using npm or yarn:
 
 ```bash
-npm install @astro-md-theme/core
+npm install @chenenpei/astro-md-theme
 # or
-yarn add @astro-md-theme/core
+yarn add @chenenpei/astro-md-theme
 ```
 
 ## 🚀 Quick Start
@@ -70,7 +70,7 @@ In your root layout or main page, import the theme's global styles:
 
 ```astro
 ---
-import '@astro-md-theme/core/styles/global.css';
+import '@chenenpei/astro-md-theme/styles/global.css';
 ---
 ```
 
@@ -82,7 +82,7 @@ Import and use the theme components in your pages:
 
 ```astro
 ---
-import HomePage from '@astro-md-theme/core/templates/HomePage.astro';
+import HomePage from '@chenenpei/astro-md-theme/templates/HomePage.astro';
 import { getCollection } from 'astro:content';
 
 const blogPosts = await getCollection('blog');
@@ -112,7 +112,7 @@ const posts = blogPosts
 
 ```astro
 ---
-import PostDetailPage from '@astro-md-theme/core/templates/PostDetailPage.astro';
+import PostDetailPage from '@chenenpei/astro-md-theme/templates/PostDetailPage.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {

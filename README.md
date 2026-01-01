@@ -143,7 +143,7 @@ Since `apps/my-blog` uses the theme as a workspace dependency, theme updates are
 
 When you're ready to publish the theme, you can:
 
-1. **Publish to NPM**: Publish `packages/theme` separately to NPM as `@astro-md-theme/core`
+1. **Publish to NPM**: Publish `packages/theme` separately to NPM as `@chenenpei/astro-md-theme`
 2. **Provide as template**: Use `apps/theme-demo` as a starter template for other users
 
 ## 🎨 Features

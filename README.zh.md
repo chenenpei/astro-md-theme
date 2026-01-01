@@ -143,7 +143,7 @@ pnpm update <package-name> --filter <app-name>
 
 当你准备发布主题时，可以：
 
-1. **发布到 NPM**：将 `packages/theme` 单独发布到 NPM 作为 `@astro-md-theme/core`
+1. **发布到 NPM**：将 `packages/theme` 单独发布到 NPM 作为 `@chenenpei/astro-md-theme`
 2. **作为模板提供**：将 `apps/theme-demo` 作为其他用户的起始模板
 
 ## 🎨 特性

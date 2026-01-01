@@ -1,7 +1,10 @@
 {
-  "name": "@astro-md-theme/core",
+  "name": "@chenenpei/astro-md-theme",
   "version": "0.0.1",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     "./Layout.astro": "./src/components/Layout.astro",
     "./Header.astro": "./src/components/Header.astro",

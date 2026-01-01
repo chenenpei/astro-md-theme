@@ -1,4 +1,4 @@
-import themeConfig from '@astro-md-theme/core/tailwind.config';
+import themeConfig from '@chenenpei/astro-md-theme/tailwind.config';
 
 /** @type {import('tailwindcss').Config} */
 export default {

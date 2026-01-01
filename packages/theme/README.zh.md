@@ -1,4 +1,4 @@
-# @astro-md-theme/core
+# @chenenpei/astro-md-theme
 
 Astro MD Theme 的核心主题包 - 一个使用 Astro 和 Tailwind CSS 构建的简约博客主题。
 
@@ -7,15 +7,15 @@ Astro MD Theme 的核心主题包 - 一个使用 Astro 和 Tailwind CSS 构建�
 在你的 Astro 项目中，安装此包：
 
 ```bash
-pnpm add @astro-md-theme/core
+pnpm add @chenenpei/astro-md-theme
 ```
 
 或者使用 npm 或 yarn：
 
 ```bash
-npm install @astro-md-theme/core
+npm install @chenenpei/astro-md-theme
 # 或
-yarn add @astro-md-theme/core
+yarn add @chenenpei/astro-md-theme
 ```
 
 ## 🚀 快速开始
@@ -70,7 +70,7 @@ export default defineConfig({
 
 ```astro
 ---
-import '@astro-md-theme/core/styles/global.css';
+import '@chenenpei/astro-md-theme/styles/global.css';
 ---
 ```
 
@@ -82,7 +82,7 @@ import '@astro-md-theme/core/styles/global.css';
 
 ```astro
 ---
-import HomePage from '@astro-md-theme/core/templates/HomePage.astro';
+import HomePage from '@chenenpei/astro-md-theme/templates/HomePage.astro';
 import { getCollection } from 'astro:content';
 
 const blogPosts = await getCollection('blog');
@@ -112,7 +112,7 @@ const posts = blogPosts
 
 ```astro
 ---
-import PostDetailPage from '@astro-md-theme/core/templates/PostDetailPage.astro';
+import PostDetailPage from '@chenenpei/astro-md-theme/templates/PostDetailPage.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {

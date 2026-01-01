@@ -5,11 +5,13 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  rssPath?: string;
 }
 
-const { 
+const {
   title = "Astro MD Theme",
-  description = "A minimalist blog theme"
+  description = "A minimalist blog theme",
+  rssPath
 } = Astro.props;
 ---
 
@@ -22,6 +24,7 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    {rssPath && <link rel="alternate" type="application/rss+xml" title={title} href={rssPath} />}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous" />
     <ViewTransitions />
     <script is:inline>

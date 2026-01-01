@@ -195,6 +195,7 @@ In your root layout (`src/layouts/Layout.astro` or similar), add the KaTeX CSS:
   - Math formulas (LaTeX) with KaTeX
   - Footnotes
   - Definition lists
+- 📡 RSS feed support
 - 🎯 TypeScript support
 - ⚡ Fast static site generation
 - 🎨 Customizable with CSS variables
@@ -220,6 +221,129 @@ The theme uses CSS variables for easy customization. You can override them in yo
   --accent: #0056b3;
   --border: #e0e0e0;
 }
+```
+
+## 📡 RSS Support
+
+The theme provides RSS generation utilities to easily add RSS feed functionality to your blog.
+
+### Install Dependencies
+
+```bash
+pnpm add @astrojs/rss
+```
+
+### Usage
+
+#### 1. Install Dependencies
+
+```bash
+pnpm add @astrojs/rss markdown-it sanitize-html
+```
+
+#### 2. Create RSS Endpoint
+
+Create `src/pages/rss.xml.js` in your project:
+
+```javascript
+import rss from '@astrojs/rss';
+import { getCollection } from 'astro:content';
+import { SITE } from '../config';
+import MarkdownIt from 'markdown-it';
+import sanitizeHtml from 'sanitize-html';
+
+const parser = new MarkdownIt({
+  html: true,     // Allow HTML tags
+  linkify: true,  // Auto-convert URLs to links
+  typographer: true,  // Enable language-neutral replacements
+});
+
+export async function GET(context) {
+  const posts = await getCollection('blog');
+
+  const rssItems = posts.map((post) => {
+    // Render Markdown to HTML
+    const htmlContent = parser.render(post.body);
+
+    // Sanitize HTML, keep safe tags
+    const sanitizedContent = sanitizeHtml(htmlContent, {
+      allowedTags: sanitizeHtml.defaults.allowedTags.concat([
+        'img', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
+      ]),
+      allowedAttributes: {
+        ...sanitizeHtml.defaults.allowedAttributes,
+        img: ['src', 'alt', 'title', 'width', 'height'],
+      },
+    });
+
+    return {
+      title: post.data.title,
+      link: `/blog/${post.slug}/`,
+      description: post.data.excerpt || post.data.description || post.data.title,
+      pubDate: post.data.pubDate,
+      content: sanitizedContent, // Full HTML content
+    };
+  });
+
+  return rss({
+    title: SITE.title,
+    description: SITE.description,
+    site: context.site || SITE.url,
+    items: rssItems,
+  });
+}
+```
+
+### Full Content Support
+
+By using `markdown-it` to render `post.body`, you can include full article content in RSS feeds.
+
+**Notes**:
+- When using `getCollection()`, you need to manually render Markdown to HTML
+- MDX (`.mdx`) files cannot be rendered with `markdown-it`; consider including only excerpts
+- Ensure images in posts use absolute paths (CDN, image hosting) or are placed in `public/` directory
+- `sanitize-html` removes dangerous HTML tags to ensure RSS content safety
+
+### RSS Auto-Discovery
+
+The theme's Layout component supports RSS auto-discovery. Pass the `rssPath` parameter when calling Layout:
+
+```astro
+---
+import Layout from '@chenenpei/astro-md-theme/Layout.astro';
+import { SITE } from '../config';
+---
+
+<Layout title={SITE.title} description={SITE.description} rssPath="/rss.xml">
+  <slot />
+</Layout>
+```
+
+This adds to `<head>`:
+```html
+<link rel="alternate" type="application/rss+xml" title="Your Site" href="/rss.xml" />
+```
+
+### Optional Utility Functions
+
+The theme also provides optional utility functions (use as needed):
+
+```javascript
+import { generateRSSFeed, blogToRSSItems } from '@chenenpei/astro-md-theme/utils/rss';
+
+// Simplify RSS generation
+const rssItems = blogToRSSItems(posts, {
+  limit: 20,        // Limit post count
+  locale: 'zh',     // Filter by locale
+  basePath: '/blog' // Custom path prefix
+});
+
+return generateRSSFeed({
+  title: SITE.title,
+  description: SITE.description,
+  site: context.site,
+  items: rssItems,
+});
 ```
 
 ## 📝 Content Collections

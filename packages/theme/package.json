@@ -18,6 +18,7 @@
     "./templates/ArchivePage.astro": "./src/templates/ArchivePage.astro",
     "./templates/AboutPage.astro": "./src/templates/AboutPage.astro",
     "./i18n": "./src/i18n/index.ts",
+    "./utils/rss": "./src/utils/rss.ts",
     "./styles/global.css": "./src/styles/global.css",
     "./tailwind.config": "./tailwind.config.mjs"
   },
@@ -27,6 +28,7 @@
     "src/styles"
   ],
   "peerDependencies": {
+    "@astrojs/rss": "^2.0.0",
     "astro": "^4.0.0",
     "tailwindcss": "^3.0.0"
   },

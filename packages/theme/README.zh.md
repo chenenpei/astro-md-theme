@@ -195,6 +195,7 @@ const { post, content: Content } = Astro.props;
   - 数学公式（LaTeX）支持（使用 KaTeX）
   - 脚注
   - 定义列表
+- 📡 RSS 订阅支持
 - 🎯 TypeScript 支持
 - ⚡ 快速的静态站点生成
 - 🎨 可通过 CSS 变量自定义
@@ -220,6 +221,129 @@ const { post, content: Content } = Astro.props;
   --accent: #0056b3;
   --border: #e0e0e0;
 }
+```
+
+## 📡 RSS 支持
+
+主题提供了 RSS 生成工具函数，方便你为博客添加 RSS 订阅功能。
+
+### 安装依赖
+
+```bash
+pnpm add @astrojs/rss
+```
+
+### 使用方法
+
+#### 1. 安装依赖
+
+```bash
+pnpm add @astrojs/rss markdown-it sanitize-html
+```
+
+#### 2. 创建 RSS 端点
+
+在你的项目中创建 `src/pages/rss.xml.js`：
+
+```javascript
+import rss from '@astrojs/rss';
+import { getCollection } from 'astro:content';
+import { SITE } from '../config';
+import MarkdownIt from 'markdown-it';
+import sanitizeHtml from 'sanitize-html';
+
+const parser = new MarkdownIt({
+  html: true,     // 允许 HTML 标签
+  linkify: true,  // 自动转换 URL 为链接
+  typographer: true,  // 启用一些语言中立的替换和引号美化
+});
+
+export async function GET(context) {
+  const posts = await getCollection('blog');
+
+  const rssItems = posts.map((post) => {
+    // 渲染 Markdown 为 HTML
+    const htmlContent = parser.render(post.body);
+
+    // 清理 HTML，保留安全的标签
+    const sanitizedContent = sanitizeHtml(htmlContent, {
+      allowedTags: sanitizeHtml.defaults.allowedTags.concat([
+        'img', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
+      ]),
+      allowedAttributes: {
+        ...sanitizeHtml.defaults.allowedAttributes,
+        img: ['src', 'alt', 'title', 'width', 'height'],
+      },
+    });
+
+    return {
+      title: post.data.title,
+      link: `/blog/${post.slug}/`,
+      description: post.data.excerpt || post.data.description || post.data.title,
+      pubDate: post.data.pubDate,
+      content: sanitizedContent, // 完整的 HTML 内容
+    };
+  });
+
+  return rss({
+    title: SITE.title,
+    description: SITE.description,
+    site: context.site || SITE.url,
+    items: rssItems,
+  });
+}
+```
+
+### 完整内容支持
+
+通过使用 `markdown-it` 渲染 `post.body`，可以在 RSS 中包含完整文章内容。
+
+**注意事项**：
+- 使用 `getCollection()` 时，需要手动渲染 Markdown 为 HTML
+- MDX (`.mdx`) 文件无法用 `markdown-it` 渲染，建议仅包含摘要
+- 确保文章中的图片使用绝对路径（如 CDN、图床）或放在 `public/` 目录
+- `sanitize-html` 会清理危险的 HTML 标签，确保 RSS 内容安全
+
+### RSS 自动发现
+
+主题的 Layout 组件支持 RSS 自动发现功能。在调用 Layout 时传入 `rssPath` 参数：
+
+```astro
+---
+import Layout from '@chenenpei/astro-md-theme/Layout.astro';
+import { SITE } from '../config';
+---
+
+<Layout title={SITE.title} description={SITE.description} rssPath="/rss.xml">
+  <slot />
+</Layout>
+```
+
+这会在 `<head>` 中添加：
+```html
+<link rel="alternate" type="application/rss+xml" title="Your Site" href="/rss.xml" />
+```
+
+### 可选工具函数
+
+主题还提供了可选的工具函数（按需使用）：
+
+```javascript
+import { generateRSSFeed, blogToRSSItems } from '@chenenpei/astro-md-theme/utils/rss';
+
+// 简化 RSS 生成
+const rssItems = blogToRSSItems(posts, {
+  limit: 20,        // 限制文章数量
+  locale: 'zh',     // 过滤特定语言
+  basePath: '/blog' // 自定义路径前缀
+});
+
+return generateRSSFeed({
+  title: SITE.title,
+  description: SITE.description,
+  site: context.site,
+  items: rssItems,
+});
 ```
 
 ## 📝 内容集合

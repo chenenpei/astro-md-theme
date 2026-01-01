@@ -6,6 +6,7 @@ category: Writing
 readingTime: 7 mins
 coverImage: https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&h=400&fit=crop
 coverImageAlt: Writing desk with typewriter
+langs: ['en']
 ---
 
 # The Art of Writing

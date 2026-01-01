@@ -4,6 +4,7 @@ excerpt: How to find quiet moments in one of the busiest cities in the world...
 pubDate: 2024-12-20
 category: Photography
 readingTime: 5 mins
+langs: ['en']
 ---
 
 # Capturing the Silence

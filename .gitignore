@@ -7,6 +7,10 @@ node_modules
 dist
 .output
 .astro
+.netlify
+build
+.vercel
+.functions
 
 # Environment variables
 .env

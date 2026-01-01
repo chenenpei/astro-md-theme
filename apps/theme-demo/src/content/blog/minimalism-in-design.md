@@ -4,6 +4,7 @@ excerpt: Why less is often more when it comes to web interfaces...
 pubDate: 2024-12-15
 category: Tech
 readingTime: 3 mins
+langs: ['en']
 ---
 
 # Minimalism in Design

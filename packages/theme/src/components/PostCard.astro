@@ -1,4 +1,7 @@
 ---
+import type { Locale } from '../i18n';
+import { formatDate } from '../i18n';
+
 interface Props {
   title: string;
   href: string;
@@ -10,19 +13,21 @@ interface Props {
   slug?: string;
   transitionNamePrefix?: string;
   source?: string;
+  locale?: Locale;
 }
 
-const { 
-  title, 
-  href, 
-  excerpt, 
-  date, 
+const {
+  title,
+  href,
+  excerpt,
+  date,
   category,
   coverImage,
   coverImageAlt = title,
   slug,
   transitionNamePrefix = '',
-  source
+  source,
+  locale = 'zh'
 } = Astro.props;
 
 const hasCover = !!coverImage;
@@ -31,7 +36,7 @@ const hasCover = !!coverImage;
 const postSlug = slug || href.split('/').filter(Boolean).pop() || 'post';
 
 // Build transition names with optional prefix
-const titleTransitionName = transitionNamePrefix 
+const titleTransitionName = transitionNamePrefix
   ? `${transitionNamePrefix}-post-title-${postSlug}`
   : `post-title-${postSlug}`;
 const imageTransitionName = transitionNamePrefix
@@ -41,19 +46,12 @@ const imageTransitionName = transitionNamePrefix
 // Build href with source query param if provided
 const linkHref = source ? `${href}?source=${source}` : href;
 
-// Format date
-let formattedDate = '';
-if (date) {
-  const dateObj = typeof date === 'string' ? new Date(date) : date;
-  formattedDate = dateObj.toLocaleDateString('en-US', { 
-    month: 'short', 
-    day: 'numeric' 
-  }).toUpperCase();
-}
+// Format date according to locale
+const formattedDate = date ? formatDate(date, locale, 'short').toUpperCase() : '';
 
-const metaText = category && formattedDate 
+const metaText = category && formattedDate
   ? `${category.toUpperCase()} · ${formattedDate}`
-  : category 
+  : category
     ? category.toUpperCase()
     : formattedDate;
 ---

@@ -6,6 +6,7 @@ category: Demo
 readingTime: 10 mins
 coverImage: https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&h=400&fit=crop
 coverImageAlt: Markdown showcase
+langs: ['en']
 ---
 
 # Markdown Format Showcase

@@ -10,6 +10,7 @@ const blog = defineCollection({
     readingTime: z.string().optional(),
     coverImage: z.string().optional(),
     coverImageAlt: z.string().optional(),
+    langs: z.array(z.enum(['zh', 'en'])).default(['zh']),
   }),
 });
 

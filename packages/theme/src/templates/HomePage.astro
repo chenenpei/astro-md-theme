@@ -3,6 +3,8 @@ import Layout from '../components/Layout.astro';
 import Header from '../components/Header.astro';
 import IntroCard from '../components/IntroCard.astro';
 import PostCard from '../components/PostCard.astro';
+import type { Locale } from '../i18n';
+import { getTranslations } from '../i18n';
 
 interface Props {
   siteTitle?: string;
@@ -24,6 +26,7 @@ interface Props {
     category?: string;
     coverImage?: string;
   }>;
+  locale?: Locale;
 }
 
 const {
@@ -33,16 +36,19 @@ const {
   authorBio = "Programmer & Street Photographer.",
   authorAvatar,
   socials,
-  posts = []
+  posts = [],
+  locale = 'zh'
 } = Astro.props;
+
+const t = getTranslations(locale);
 ---
 
 <Layout title={siteTitle} description={siteDescription}>
-  <Header siteTitle={siteTitle} currentPath="/" />
-  
+  <Header siteTitle={siteTitle} currentPath="/" locale={locale} />
+
   <main class="main-container">
     <div class="md-card">
-      <IntroCard 
+      <IntroCard
         name={authorName}
         bio={authorBio}
         avatar={authorAvatar}
@@ -51,8 +57,8 @@ const {
     </div>
 
     <div class="md-card">
-      <div class="list-header">Latest Posts</div>
-      
+      <div class="list-header">{t.list.latestPosts}</div>
+
       {posts.map((post) => (
         <PostCard
           title={post.title}
@@ -62,12 +68,13 @@ const {
           category={post.category}
           coverImage={post.coverImage}
           slug={post.slug}
+          locale={locale}
         />
       ))}
-      
+
       {posts.length > 0 && (
         <a href="/archive" class="archive-link">
-          VIEW ALL ARCHIVES
+          {t.buttons.viewAllArchives}
         </a>
       )}
     </div>

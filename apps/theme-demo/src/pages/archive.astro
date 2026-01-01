@@ -1,10 +1,19 @@
 ---
+import type { Locale } from '@chenenpei/astro-md-theme/i18n';
 import ArchivePage from '@chenenpei/astro-md-theme/templates/ArchivePage.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 
+
+// Use Astro.url.searchParams directly to get dynamic behavior
+const searchParams = Astro.url.searchParams;
+const urlLocale = searchParams.get('lang') as Locale | null;
+
+const locale: Locale = (urlLocale === 'zh' || urlLocale === 'en') ? urlLocale : 'zh'
+
 const blogPosts = await getCollection('blog');
 const posts = blogPosts
+  .filter((post: CollectionEntry<'blog'>) => post.data.langs.includes(locale))
   .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => 
     b.data.pubDate.getTime() - a.data.pubDate.getTime()
   )

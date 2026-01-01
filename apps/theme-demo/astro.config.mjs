@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import netlify from '@astrojs/netlify';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import remarkDefinitionList from 'remark-definition-list';
@@ -7,6 +8,8 @@ import { SITE } from './src/config';
 import VitePWA from '@vite-pwa/astro';
 
 export default defineConfig({
+  output: 'server',
+  adapter: netlify(),
   integrations: [
     tailwind({
       // Extend the theme's Tailwind config
@@ -56,4 +59,3 @@ export default defineConfig({
     rehypePlugins: [rehypeKatex],
   },
 });
-

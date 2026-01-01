@@ -13,6 +13,7 @@ const blog = defineCollection({
     coverImage: z.string().optional(),
     coverImageAlt: z.string().optional(),
     heroImage: z.string().optional(), // Keep for backward compatibility
+    langs: z.array(z.enum(['zh', 'en'])).default(['zh']),
   }),
 });
 

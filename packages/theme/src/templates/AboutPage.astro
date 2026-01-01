@@ -1,6 +1,7 @@
 ---
 import Layout from '../components/Layout.astro';
 import Header from '../components/Header.astro';
+import type { Locale } from '../i18n';
 
 interface Props {
   siteTitle?: string;
@@ -8,6 +9,7 @@ interface Props {
   authorBio?: string;
   authorAvatar?: string;
   content?: any;
+  locale?: Locale;
 }
 
 const {
@@ -15,12 +17,13 @@ const {
   authorName = "Your Name",
   authorBio,
   authorAvatar,
-  content
+  content,
+  locale = 'zh'
 } = Astro.props;
 ---
 
 <Layout title={`About - ${siteTitle}`}>
-  <Header siteTitle={siteTitle} currentPath="/about" />
+  <Header siteTitle={siteTitle} currentPath="/about" locale={locale} />
   
   <main class="about-container">
     <div class="about-card md-card">

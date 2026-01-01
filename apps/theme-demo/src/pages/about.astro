@@ -1,11 +1,19 @@
 ---
 import AboutPage from '@chenenpei/astro-md-theme/templates/AboutPage.astro';
+import type { Locale } from '@chenenpei/astro-md-theme/i18n';
+
+// Use Astro.url.searchParams directly to get dynamic behavior
+const searchParams = Astro.url.searchParams;
+const urlLocale = searchParams.get('lang') as Locale | null;
+
+const locale: Locale = (urlLocale === 'zh' || urlLocale === 'en') ? urlLocale : 'zh';
 ---
 
 <AboutPage
   siteTitle="My Space."
   authorName="Demo Author"
   authorBio="Programmer & Street Photographer."
+  locale={locale}
 >
   <h2>About This Blog</h2>
   <p>This is a demo of the Astro MD Theme, a minimalist blog theme inspired by The New York Times and Material Design principles.</p>

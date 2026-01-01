@@ -16,15 +16,26 @@ const {
 
 const t = getTranslations(locale);
 
+// Add lang parameter to href if locale is not default (zh)
+const addLangParam = (href: string) => {
+  if (locale !== 'zh') {
+    const separator = href.includes('?') ? '&' : '?';
+    return `${href}${separator}lang=${locale}`;
+  }
+  return href;
+};
+
 const navItems = [
-  { href: "/", label: t.nav.home },
-  { href: "/archive", label: t.nav.articles },
-  { href: "/about", label: t.nav.about },
+  { href: addLangParam("/"), label: t.nav.home },
+  { href: addLangParam("/archive"), label: t.nav.articles },
+  { href: addLangParam("/about"), label: t.nav.about },
 ];
 
 const isActive = (href: string) => {
+  // Extract pathname from href (remove query parameters)
+  const hrefPath = href.split('?')[0].split('#')[0];
   const normalizedPath = currentPath.endsWith('/') ? currentPath.slice(0, -1) : currentPath;
-  const normalizedHref = href.endsWith('/') ? href.slice(0, -1) : href;
+  const normalizedHref = hrefPath.endsWith('/') ? hrefPath.slice(0, -1) : hrefPath;
 
   if (normalizedHref === '') {
     return normalizedPath === '';
@@ -183,6 +194,60 @@ const isActive = (href: string) => {
     }, 600);
   }
 
+  function updateNavLinks() {
+    // Get current lang parameter from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentLang = urlParams.get('lang');
+    
+    // Update links if lang parameter exists (preserve lang when navigating)
+    if (currentLang && (currentLang === 'zh' || currentLang === 'en')) {
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach((link) => {
+        const href = link.getAttribute('href');
+        if (href) {
+          try {
+            const url = new URL(href, window.location.origin);
+            // Update lang parameter to match current page
+            url.searchParams.set('lang', currentLang);
+            link.setAttribute('href', url.pathname + url.search);
+          } catch (e) {
+            // If URL parsing fails, try simple string manipulation
+            const hasQuery = href.includes('?');
+            const hasLang = href.includes('lang=');
+            
+            if (hasLang) {
+              // Replace existing lang parameter
+              const newHref = href.replace(/[?&]lang=[^&]*/, '');
+              const separator = newHref.includes('?') ? '&' : '?';
+              link.setAttribute('href', `${newHref}${separator}lang=${currentLang}`);
+            } else {
+              // Add lang parameter
+              const separator = hasQuery ? '&' : '?';
+              link.setAttribute('href', `${href}${separator}lang=${currentLang}`);
+            }
+          }
+        }
+      });
+    } else {
+      // If no lang parameter, remove it from links (default to zh)
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach((link) => {
+        const href = link.getAttribute('href');
+        if (href && href.includes('lang=')) {
+          try {
+            const url = new URL(href, window.location.origin);
+            url.searchParams.delete('lang');
+            const newHref = url.pathname + (url.search ? url.search : '');
+            link.setAttribute('href', newHref || url.pathname);
+          } catch (e) {
+            // If URL parsing fails, try simple string manipulation
+            link.setAttribute('href', href.replace(/[?&]lang=[^&]*/, '').replace(/\?$/, ''));
+          }
+        }
+      });
+    }
+  }
+
   function initHeader() {
     const toggleBtn = document.getElementById('theme-toggle');
     const localeBtn = document.getElementById('locale-toggle');
@@ -201,6 +266,9 @@ const isActive = (href: string) => {
     }
 
     updateLocaleButton();
+    
+    // Update navigation links to preserve lang parameter
+    updateNavLinks();
 
     // Apply and initialize theme
     const savedTheme = localStorage.getItem('theme') || 'light';
@@ -351,17 +419,15 @@ const isActive = (href: string) => {
     font-family: var(--font-serif);
     font-size: 2.5rem;
     font-weight: normal;
-    margin: 20px 0 0 0;
+    margin: 20px 0 0 12px;
     letter-spacing: -1px;
   }
 
   .nav-tabs {
     display: flex;
-    gap: 30px;
     margin-top: 30px;
     margin-bottom: 0;
     padding-bottom: 0;
-    /* Move border to bottom of nav items for material tab look */
   }
 
   .nav-link {
@@ -370,9 +436,9 @@ const isActive = (href: string) => {
     text-transform: uppercase;
     font-weight: 500;
     font-size: 0.875rem; /* 14px */
-    padding: 0 12px 16px 12px;
+    padding: 12px 24px;
     border-bottom: 2px solid transparent;
-    transition: color 0.2s, border-color 0.2s;
+    transition: color 0.2s, border-color 0.2s, background-color 0.2s;
     position: relative;
     letter-spacing: 0.5px;
   }
@@ -399,14 +465,11 @@ const isActive = (href: string) => {
 
     .blog-title {
       font-size: 2rem;
-    }
-
-    .nav-tabs {
-      gap: 12px;
+      margin-left: 8px;
     }
     
     .nav-link {
-       padding: 0 8px 12px 8px;
+       padding: 8px 16px;
        font-size: 0.8rem;
     }
   }

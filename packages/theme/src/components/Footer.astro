@@ -1,0 +1,58 @@
+---
+interface Props {
+  copyrightOwner?: string;
+  startYear?: number;
+}
+
+const {
+  copyrightOwner = "My Space.",
+  startYear
+} = Astro.props;
+
+const currentYear = new Date().getFullYear();
+const displayYear = startYear && startYear < currentYear 
+  ? `${startYear}-${currentYear}` 
+  : currentYear.toString();
+---
+
+<footer class="md-footer">
+  <div class="footer-content">
+    <p class="footer-text">
+      © {displayYear} {copyrightOwner}
+    </p>
+  </div>
+</footer>
+
+<style>
+  .md-footer {
+    background-color: var(--card-bg);
+    border-top: 1px solid var(--border);
+    padding: 24px 20px;
+    margin-top: 60px;
+    text-align: center;
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-text {
+    color: var(--text-sec);
+    font-size: 0.875rem;
+    font-family: var(--font-sans);
+    margin: 0;
+  }
+
+  @media (max-width: 700px) {
+    .md-footer {
+      padding: 20px 16px;
+      margin-top: 40px;
+    }
+
+    .footer-text {
+      font-size: 0.8rem;
+    }
+  }
+</style>
+

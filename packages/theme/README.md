@@ -179,10 +179,11 @@ In your root layout (`src/layouts/Layout.astro` or similar), add the KaTeX CSS:
 
 - `Layout.astro` - Root layout component
 - `Header.astro` - Site header component
-- `Post.astro` - Post component
+- `Footer.astro` - Site footer component
 - `PostCard.astro` - Post card component for listings
 - `IntroCard.astro` - Introduction card component
 - `PaperSheet.astro` - Paper-style container for content
+- `ScrollTopFab.astro` - Floating action button for scrolling to top
 
 ## 🎨 Features
 
@@ -195,6 +196,8 @@ In your root layout (`src/layouts/Layout.astro` or similar), add the KaTeX CSS:
   - Math formulas (LaTeX) with KaTeX
   - Footnotes
   - Definition lists
+- 👆 Scroll to Top FAB (Floating Action Button)
+- 🦶 Consistent Footer
 - 📡 RSS feed support
 - 🎯 TypeScript support
 - ⚡ Fast static site generation

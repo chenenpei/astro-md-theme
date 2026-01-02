@@ -1,0 +1,152 @@
+---
+// Floating Action Button for scrolling to top
+---
+
+<button 
+  id="scroll-top-fab" 
+  class="scroll-top-fab"
+  aria-label="Scroll to top"
+  title="Scroll to top"
+>
+  <svg class="fab-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M12 19V5M5 12l7-7 7 7"/>
+  </svg>
+</button>
+
+<script is:inline>
+  (function() {
+    let scrollHandler = null;
+    let clickHandler = null;
+
+    function initScrollTopFab() {
+      const fab = document.getElementById('scroll-top-fab');
+      if (!fab) return;
+
+      // Remove old listeners if they exist
+      if (scrollHandler) {
+        window.removeEventListener('scroll', scrollHandler);
+      }
+      if (clickHandler) {
+        fab.removeEventListener('click', clickHandler);
+      }
+
+      const scrollThreshold = 300;
+
+      function updateFabVisibility() {
+        if (window.scrollY > scrollThreshold) {
+          fab.classList.add('visible');
+        } else {
+          fab.classList.remove('visible');
+        }
+      }
+
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
+
+      // Store handlers for cleanup
+      scrollHandler = updateFabVisibility;
+      clickHandler = scrollToTop;
+
+      // Initial check
+      updateFabVisibility();
+
+      // Listen to scroll events
+      window.addEventListener('scroll', updateFabVisibility, { passive: true });
+
+      // Handle click
+      fab.addEventListener('click', scrollToTop);
+    }
+
+    // Initialize on DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initScrollTopFab);
+    } else {
+      initScrollTopFab();
+    }
+
+    // Re-initialize after view transitions
+    document.addEventListener('astro:page-load', initScrollTopFab);
+    document.addEventListener('astro:after-swap', initScrollTopFab);
+  })();
+</script>
+
+<style>
+  .scroll-top-fab {
+    position: fixed;
+    bottom: 44px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #121212;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                background-color 0.2s;
+    z-index: 1000;
+    pointer-events: none;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .scroll-top-fab.visible {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+  }
+
+  .scroll-top-fab:hover {
+    background-color: #000000;
+    opacity: 0.9;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .scroll-top-fab:active {
+    transform: scale(0.95);
+  }
+
+  .fab-icon {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+  }
+
+  [data-theme="dark"] .scroll-top-fab {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+
+  [data-theme="dark"] .scroll-top-fab:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7);
+  }
+
+  @media (max-width: 700px) {
+    .scroll-top-fab {
+      bottom: 38px;
+      right: 16px;
+      width: 48px;
+      height: 48px;
+    }
+
+    .fab-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+</style>
+

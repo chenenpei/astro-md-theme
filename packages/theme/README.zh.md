@@ -179,10 +179,11 @@ const { post, content: Content } = Astro.props;
 
 - `Layout.astro` - 根布局组件
 - `Header.astro` - 网站头部组件
-- `Post.astro` - 文章组件
+- `Footer.astro` - 网站页脚组件
 - `PostCard.astro` - 文章列表卡片组件
 - `IntroCard.astro` - 介绍卡片组件
 - `PaperSheet.astro` - 纸张风格的内容容器
+- `ScrollTopFab.astro` - 滚动到顶部浮动按钮组件
 
 ## 🎨 特性
 
@@ -195,6 +196,8 @@ const { post, content: Content } = Astro.props;
   - 数学公式（LaTeX）支持（使用 KaTeX）
   - 脚注
   - 定义列表
+- 👆 滚动到顶部 FAB（浮动操作按钮）
+- 🦶 统一的页脚设计
 - 📡 RSS 订阅支持
 - 🎯 TypeScript 支持
 - ⚡ 快速的静态站点生成

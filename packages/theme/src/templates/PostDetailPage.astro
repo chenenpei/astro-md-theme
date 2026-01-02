@@ -1,6 +1,7 @@
 ---
 import Layout from '../components/Layout.astro';
 import PaperSheet from '../components/PaperSheet.astro';
+import ScrollTopFab from '../components/ScrollTopFab.astro';
 
 interface Props {
   siteTitle?: string;
@@ -70,6 +71,7 @@ const metaText = [formattedDate, readingTime].filter(Boolean).join(' · ');
       <slot />
     </div>
   </PaperSheet>
+  <ScrollTopFab />
 </Layout>
 
 <style>

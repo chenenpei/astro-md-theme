@@ -1,17 +1,22 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
 import '../styles/global.css';
+import Footer from './Footer.astro';
 
 interface Props {
   title?: string;
   description?: string;
   rssPath?: string;
+  copyrightOwner?: string;
+  startYear?: number;
 }
 
 const {
   title = "Astro MD Theme",
   description = "A minimalist blog theme",
-  rssPath
+  rssPath,
+  copyrightOwner,
+  startYear
 } = Astro.props;
 ---
 
@@ -72,5 +77,6 @@ const {
   </head>
   <body>
     <slot />
+    <Footer copyrightOwner={copyrightOwner} startYear={startYear} />
   </body>
 </html>

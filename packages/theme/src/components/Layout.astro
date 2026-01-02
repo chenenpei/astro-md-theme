@@ -33,6 +33,41 @@ const {
         const savedTheme = localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute('data-theme', savedTheme);
       })();
+
+      // Dynamic View Transition Names for static pages
+      function updateTransitionNames() {
+        try {
+          const currentUrl = window.location.href;
+          const url = new URL(currentUrl);
+          const source = url.searchParams.get('source');
+          
+          if (source && url.pathname.includes('/blog/')) {
+            const pathParts = url.pathname.split('/').filter(Boolean);
+            const slug = pathParts[pathParts.length - 1];
+            
+            if (slug) {
+              // Try to find title in current document
+              const title = document.querySelector('.paper-title');
+              if (title) {
+                title.style.viewTransitionName = `${source}-post-title-${slug}`;
+              }
+              
+              const img = document.querySelector('.paper-cover-image');
+              if (img) {
+                img.style.viewTransitionName = `${source}-post-image-${slug}`;
+              }
+            }
+          }
+        } catch (e) {
+          console.error('Error updating transition names:', e);
+        }
+      }
+
+      // Run on initial load
+      updateTransitionNames();
+
+      // Run after swap (this works because script runs in the new document context)
+      document.addEventListener('astro:after-swap', updateTransitionNames);
     </script>
   </head>
   <body>

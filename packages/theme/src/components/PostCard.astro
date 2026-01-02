@@ -43,8 +43,22 @@ const imageTransitionName = transitionNamePrefix
   ? `${transitionNamePrefix}-post-image-${postSlug}`
   : `post-image-${postSlug}`;
 
-// Build href with source query param if provided
-const linkHref = source ? `${href}?source=${source}` : href;
+// Build href with source and lang query params if provided
+let linkHref = href;
+const params = [];
+
+if (source) {
+  params.push(`source=${source}`);
+}
+
+if (locale !== 'zh') {
+  params.push(`lang=${locale}`);
+}
+
+if (params.length > 0) {
+  const separator = linkHref.includes('?') ? '&' : '?';
+  linkHref = `${linkHref}${separator}${params.join('&')}`;
+}
 
 // Format date according to locale
 const formattedDate = date ? formatDate(date, locale, 'short').toUpperCase() : '';

@@ -29,13 +29,9 @@ const {
 // Extract slug from URL if not provided
 const postSlug = slug || Astro.url.pathname.split('/').filter(Boolean).pop() || 'post';
 
-// Get source from query param to determine transition name prefix
-const source = Astro.url.searchParams.get('source') || '';
-const transitionNamePrefix = source ? `${source}-` : '';
-
-// Build transition names with optional prefix
-const titleTransitionName = `${transitionNamePrefix}post-title-${postSlug}`;
-const imageTransitionName = `${transitionNamePrefix}post-image-${postSlug}`;
+// Use default transition names (will be updated by client script if source param exists)
+const titleTransitionName = `post-title-${postSlug}`;
+const imageTransitionName = `post-image-${postSlug}`;
 
 let formattedDate = '';
 if (date) {

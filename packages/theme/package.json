@@ -1,6 +1,6 @@
 {
   "name": "@chenenpei/astro-md-theme",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "module",
   "publishConfig": {
     "access": "public"
@@ -11,8 +11,6 @@
     "./PostCard.astro": "./src/components/PostCard.astro",
     "./IntroCard.astro": "./src/components/IntroCard.astro",
     "./PaperSheet.astro": "./src/components/PaperSheet.astro",
-    "./Post.astro": "./src/components/Post.astro",
-    "./TestComponent.astro": "./src/components/TestComponent.astro",
     "./templates/HomePage.astro": "./src/templates/HomePage.astro",
     "./templates/PostDetailPage.astro": "./src/templates/PostDetailPage.astro",
     "./templates/ArchivePage.astro": "./src/templates/ArchivePage.astro",

@@ -73,7 +73,10 @@ const t = getTranslations(locale);
       ))}
 
       {posts.length > 0 && (
-        <a href="/archive" class="archive-link">
+        <a 
+          href={locale !== 'zh' ? `/archive?lang=${locale}` : '/archive'} 
+          class="archive-link"
+        >
           {t.buttons.viewAllArchives}
         </a>
       )}
